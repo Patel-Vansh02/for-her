@@ -81,19 +81,28 @@
 
 <body class="text-rose-950 relative selection:bg-rose-200 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] px-3 sm:px-0">
 
-  <!-- Background Music Element -->
-  <audio id="bgSong" loop preload="auto">
-    <source src="background-song.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+  <!-- ================= AUDIO TRACKS ================= -->
+  <!-- Track 1: Plays from initial entrance -->
+  <audio id="bgSong1" loop preload="auto">
+    <!-- add your song here (e.g. src="first-song.mp3") -->
+    <source src="" type="audio/mpeg">
+    Your browser does not support audio.
   </audio>
 
-  <!-- Mobile-friendly Audio Tap Screen -->
+  <!-- Track 2: Plays when love letter is revealed -->
+  <audio id="bgSong2" loop preload="auto">
+    <!-- add your song here (e.g. src="letter-song.mp3") -->
+    <source src="" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+
+  <!-- ================= ENTRANCE OVERLAY SCREEN ================= -->
   <div id="entryOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-rose-50/95 backdrop-blur-md transition-opacity duration-700">
     <div class="text-center space-y-4 px-6 max-w-sm">
       <div class="text-6xl animate-bounce">💌</div>
       <h2 class="text-3xl font-extrabold text-rose-800">A Surprise For My Betuu</h2>
-      <p class="text-rose-500 font-medium text-sm">Turn up your volume for the full experience 🎶✨</p>
-      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition">
+      <p class="text-rose-500 font-medium text-sm">Turn up your volume for the best experience 🎶✨</p>
+      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
         Tap to Open 💖
       </button>
     </div>
@@ -101,9 +110,10 @@
 
   <div id="heart-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
-  <!-- Main Content Wrapper -->
+  <!-- ================= MAIN CONTENT ================= -->
   <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 flex flex-col gap-16">
 
+    <!-- Header Section -->
     <header class="text-center space-y-4">
       <div class="inline-flex items-center gap-2 bg-rose-100/80 border border-rose-200/60 px-4 py-1.5 rounded-full text-rose-600 text-sm font-semibold tracking-wide shadow-sm animate-bounce">
         <span>✨ IT'S YOUR SPECIAL DAY! ✨</span>
@@ -125,6 +135,7 @@
       </div>
     </header>
 
+    <!-- Polaroid Photos Section -->
     <section class="space-y-6">
       <div class="text-center">
         <span class="text-rose-400 font-bold uppercase tracking-wider text-xs">Our Little Moments</span>
@@ -193,8 +204,16 @@
       </div>
     </section>
 
-    <!-- Love Letter Section -->
-    <section class="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 space-y-6">
+    <!-- Reveal Button for Love Letter -->
+    <div id="letterBtnContainer" class="text-center">
+      <button id="openLetterBtn" class="bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-pink-300/50 hover:scale-105 active:scale-95 transition cursor-pointer inline-flex items-center gap-2">
+        <span>Open My Love Letter 💌</span>
+        <span class="text-xl">✨</span>
+      </button>
+    </div>
+
+    <!-- Hidden Love Letter Section (Crossfades to Song 2 when revealed) -->
+    <section id="loveLetterSection" class="hidden opacity-0 transition-opacity duration-1000 bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 space-y-6">
       <div class="flex items-center gap-3 border-b border-rose-100 pb-4">
         <div class="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-xl">💌</div>
         <div>
@@ -283,6 +302,7 @@
         <!-- Voice Note Player Controls -->
         <div class="pt-2">
           <audio id="voiceNote" controls class="w-full rounded-full border border-rose-200 bg-rose-50 accent-rose-500">
+            <!-- add your song here (or your voicenote file e.g. src="voicenote.mp3") -->
             <source src="voicenote.mp3" type="audio/mpeg">
             Your browser does not support audio.
           </audio>
@@ -290,6 +310,7 @@
       </div>
     </section>
 
+    <!-- Footer -->
     <footer class="text-center py-6 space-y-3">
       <div class="flex items-center justify-center gap-3 text-2xl">
         <span>🧁</span>
@@ -308,8 +329,9 @@
 
   </main>
 
+  <!-- ================= SCRIPTS ================= -->
   <script>
-    // Floating hearts generator
+    // Floating hearts animation
     function createFloatingHearts() {
       const container = document.getElementById('heart-container');
       const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
@@ -327,7 +349,7 @@
       }
     }
 
-    // Canvas Confetti blast
+    // Canvas Confetti
     function triggerConfetti() {
       if (typeof confetti === 'function') {
         confetti({
@@ -356,21 +378,26 @@
       }
     }
 
-    // Audio elements & UI references
+    // Audio & DOM Elements
+    const song1 = document.getElementById('bgSong1');
+    const song2 = document.getElementById('bgSong2');
     const enterBtn = document.getElementById('enterSiteBtn');
     const overlay = document.getElementById('entryOverlay');
-    const bgSong = document.getElementById('bgSong');
+    const openLetterBtn = document.getElementById('openLetterBtn');
+    const letterBtnContainer = document.getElementById('letterBtnContainer');
+    const loveLetterSection = document.getElementById('loveLetterSection');
     const surpriseBtn = document.getElementById('surpriseBtn');
     const surpriseCard = document.getElementById('surpriseCard');
     const giftIcon = document.getElementById('giftIcon');
     const giftPrompt = document.getElementById('giftPrompt');
     const voiceNote = document.getElementById('voiceNote');
+    const confettiBtn = document.getElementById('confettiBtn');
 
-    // 1. Entrance tap to start music
+    // 1. Entrance click -> Start Song 1 & hide overlay
     enterBtn.addEventListener('click', () => {
-      if (bgSong) {
-        bgSong.volume = 0.5;
-        bgSong.play().catch(err => console.log('Audio autoplay blocked:', err));
+      if (song1) {
+        song1.volume = 0.5;
+        song1.play().catch(err => console.log('Audio autoplay prevented:', err));
       }
 
       triggerConfetti();
@@ -381,43 +408,30 @@
       }, 700);
     });
 
-    // 2. Surprise gift & voice note reveal
-    let isRevealed = false;
-    surpriseBtn.addEventListener('click', () => {
-      // Lower background music volume while voice note plays
-      if (bgSong) {
-        bgSong.volume = 0.15;
+    // 2. Smooth Crossfade function from Audio A to Audio B
+    function crossfadeAudio(fromAudio, toAudio, targetVolume = 0.5) {
+      if (toAudio) {
+        toAudio.volume = 0;
+        toAudio.play().catch(err => console.log('Playback error:', err));
       }
 
-      if (voiceNote) {
-        voiceNote.play().catch(e => console.log('Playback error:', e));
-        
-        // Restore music volume once voice note finishes
-        voiceNote.onended = () => {
-          if (bgSong) bgSong.volume = 0.5;
-        };
-      }
+      const steps = 20;
+      const intervalTime = 100; // ~2 seconds total fade
+      let step = 0;
 
-      triggerConfetti();
+      const fadeInterval = setInterval(() => {
+        step++;
+        const progress = step / steps;
 
-      if (!isRevealed) {
-        surpriseCard.classList.remove('hidden');
-        giftIcon.textContent = '💖';
-        giftPrompt.textContent = 'Opened with Love!';
-        isRevealed = true;
-      }
-    });
+        if (fromAudio && !fromAudio.paused) {
+          fromAudio.volume = Math.max(0, targetVolume * (1 - progress));
+        }
 
-    // Extra confetti button
-    const confettiBtn = document.getElementById('confettiBtn');
-    confettiBtn.addEventListener('click', () => {
-      triggerConfetti();
-    });
+        if (toAudio) {
+          toAudio.volume = Math.min(targetVolume, targetVolume * progress);
+        }
 
-    // Load initialization
-    window.addEventListener('load', () => {
-      createFloatingHearts();
-    });
-  </script>
-</body>
-</html>
+        if (step >= steps) {
+          clearInterval(fadeInterval);
+          if (fromAudio) {
+            fromAudio
