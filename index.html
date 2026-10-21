@@ -82,7 +82,6 @@
 <body class="text-rose-950 relative selection:bg-rose-200 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] px-3 sm:px-0">
 
   <!-- Background Audio Elements for Scroll Switcher -->
-  
   <audio id="audio-photos" preload="auto" loop>
     <source src="Dhun Laagi AETrim1792581107931.mp3" type="audio/mpeg">
   </audio>
@@ -341,3 +340,118 @@
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
+          colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
+        });
+
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#fb7185', '#f472b6', '#a855f7']
+          });
+          confetti({
+            particleCount: 50,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#fb7185', '#f472b6', '#a855f7']
+          });
+        }, 250);
+      }
+    }
+
+    // UI references
+    const enterBtn = document.getElementById('enterSiteBtn');
+    const overlay = document.getElementById('entryOverlay');
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const surpriseCard = document.getElementById('surpriseCard');
+    const giftIcon = document.getElementById('giftIcon');
+    const giftPrompt = document.getElementById('giftPrompt');
+    const voiceNote = document.getElementById('voiceNote');
+
+    // Scroll-based dynamic audio switcher variables
+    let currentAudio = null;
+    let siteStarted = false;
+
+    function playAudioForSection(audioId) {
+      if (!siteStarted) return; // Don't play until user taps entry overlay
+      const newAudio = document.getElementById(audioId);
+      if (!newAudio || currentAudio === newAudio) return;
+
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      currentAudio = newAudio;
+      currentAudio.volume = 0.5;
+      currentAudio.play().catch(err => console.log("Scroll audio autoplay prevented:", err));
+    }
+
+    // Map Section IDs to Audio IDs
+    const sectionAudioMap = {
+      'sec-intro': 'audio-photos',
+      'sec-photos': 'audio-photos',
+      'sec-letter': 'audio-letter'
+    };
+
+    const observerOptions = {
+      root: null,
+      threshold: 0.4
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const audioId = sectionAudioMap[entry.target.id];
+          if (audioId) {
+            playAudioForSection(audioId);
+          }
+        }
+      });
+    }, observerOptions);
+
+    // 1. Entrance tap to start experience & music
+    enterBtn.addEventListener('click', () => {
+      siteStarted = true;
+      playAudioForSection('audio-photos');
+
+      triggerConfetti();
+
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 700);
+    });
+
+    // 2. Surprise gift & voice note reveal
+    let isRevealed = false;
+    surpriseBtn.addEventListener('click', () => {
+      // Lower background music volume while voice note plays
+      if (currentAudio) {
+        currentAudio.volume = 0.15;
+      }
+
+      if (voiceNote) {
+        voiceNote.play().catch(e => console.log('Playback error:', e));
+
+        voiceNote.onended = () => {
+          if (currentAudio) currentAudio.volume = 0.5;
+        };
+      }
+
+      triggerConfetti();
+
+      if (!isRevealed) {
+        surpriseCard.classList.remove('hidden');
+        giftIcon.textContent = '💖';
+        giftPrompt.textContent = 'Opened with Love!';
+        isRevealed = true;
+      }
+    });
+
+    // Extra confetti button
+    const confettiBtn = document.getElementById('confettiBtn');
+    confettiBtn.addEventListener(
