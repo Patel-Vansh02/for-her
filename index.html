@@ -209,6 +209,21 @@
           The first time I looked into your eyes after realizing I had a crush on you was pure nervousness, but also the sweetest, most wholesome moment. I felt like if I hugged you, I'd never want to let you go. I tried to talk to you in school so many times, but something always held me back from confessing. Even now that we're together, I still have that same crush on you, and I still fall for you all over again. 💕
         </p>
 
+        <!-- Surprise Wish Button for Letter Paragraph -->
+        <div class="pt-3 pb-2 text-center">
+          <button id="letterSurpriseBtn" class="pulse-glow inline-flex items-center gap-2 bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
+            <span id="letterGiftIcon" class="text-2xl">🎁</span>
+            <span id="letterGiftPrompt" class="text-sm">Tap for a special birthday wish! 💖</span>
+          </button>
+
+          <!-- Hidden Letter Surprise Note -->
+          <div id="letterSurpriseCard" class="hidden mt-4 p-5 rounded-2xl bg-rose-50 border border-pink-200 text-center max-w-lg mx-auto transition-all duration-300">
+            <p class="font-handwriting text-2xl sm:text-3xl text-rose-600 font-bold leading-snug">
+              "You are my favourite person today, tomorrow & every day that follows! 🫶💖💘🎀"
+            </p>
+          </div>
+        </div>
+
         <p>
           I never imagined how far we would come in this relationship. We started as complete strangers, turned into best friends having random chats, and became everything to each other. I bet you didn't know that I used to note down every single detail you ever told me about yourself. I acted completely normal back then to hide my feelings, but that one confession changed my entire life. Thank you for choosing me, jaanu. 💞
         </p>
@@ -327,7 +342,7 @@
       }
     }
 
-    // Canvas Confetti blast
+    // Standard Confetti blast
     function triggerConfetti() {
       if (typeof confetti === 'function') {
         confetti({
@@ -356,6 +371,30 @@
       }
     }
 
+    // Emoji Confetti Blast for the Letter Surprise
+    function triggerEmojiConfetti() {
+      if (typeof confetti === 'function') {
+        const letterEmojis = ['🫶', '💖', '💘', '🎀', '✨'];
+        
+        // Center Emoji blast
+        confetti({
+          particleCount: 40,
+          spread: 90,
+          origin: { y: 0.5 },
+          shapes: letterEmojis.map(emoji => confetti.shapeFromText({ text: emoji, scalar: 2 })),
+          scalar: 2
+        });
+
+        // Complementary sparkling colors
+        confetti({
+          particleCount: 60,
+          spread: 80,
+          origin: { y: 0.5 },
+          colors: ['#f43f5e', '#ec4899', '#f472b6', '#ffd1dc']
+        });
+      }
+    }
+
     // Audio elements & UI references
     const enterBtn = document.getElementById('enterSiteBtn');
     const overlay = document.getElementById('entryOverlay');
@@ -365,6 +404,12 @@
     const giftIcon = document.getElementById('giftIcon');
     const giftPrompt = document.getElementById('giftPrompt');
     const voiceNote = document.getElementById('voiceNote');
+
+    // Letter Surprise references
+    const letterSurpriseBtn = document.getElementById('letterSurpriseBtn');
+    const letterSurpriseCard = document.getElementById('letterSurpriseCard');
+    const letterGiftIcon = document.getElementById('letterGiftIcon');
+    const letterGiftPrompt = document.getElementById('letterGiftPrompt');
 
     // 1. Entrance tap to start music
     enterBtn.addEventListener('click', () => {
@@ -381,43 +426,12 @@
       }, 700);
     });
 
-    // 2. Surprise gift & voice note reveal
-    let isRevealed = false;
-    surpriseBtn.addEventListener('click', () => {
-      // Lower background music volume while voice note plays
-      if (bgSong) {
-        bgSong.volume = 0.15;
-      }
+    // 2. Love Letter surprise button with emoji confetti
+    let isLetterRevealed = false;
+    letterSurpriseBtn.addEventListener('click', () => {
+      triggerEmojiConfetti();
 
-      if (voiceNote) {
-        voiceNote.play().catch(e => console.log('Playback error:', e));
-
-        // Restore music volume once voice note finishes
-        voiceNote.onended = () => {
-          if (bgSong) bgSong.volume = 0.5;
-        };
-      }
-
-      triggerConfetti();
-
-      if (!isRevealed) {
-        surpriseCard.classList.remove('hidden');
-        giftIcon.textContent = '💖';
-        giftPrompt.textContent = 'Opened with Love!';
-        isRevealed = true;
-      }
-    });
-
-    // Extra confetti button
-    const confettiBtn = document.getElementById('confettiBtn');
-    confettiBtn.addEventListener('click', () => {
-      triggerConfetti();
-    });
-
-    // Load initialization
-    window.addEventListener('load', () => {
-      createFloatingHearts();
-    });
-  </script>
-</body>
-  </html>
+      if (!isLetterRevealed) {
+        letterSurpriseCard.classList.remove('hidden');
+        letterGiftIcon.textContent = '🫶';
+        letterGiftPrompt.textContent = 'Special Wish for Hastii! 
