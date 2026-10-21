@@ -95,7 +95,7 @@
       <div class="text-6xl animate-bounce">💌</div>
       <h2 class="text-3xl font-extrabold text-rose-800">A Surprise For My Betuu</h2>
       <p class="text-rose-500 font-medium text-sm">Turn up your volume for the full experience 🎶✨</p>
-      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition">
+      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
         Tap to Open 💖
       </button>
     </div>
@@ -318,6 +318,7 @@
     // Floating hearts generator
     function createFloatingHearts() {
       const container = document.getElementById('heart-container');
+      if (!container) return;
       const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
       const count = 18;
 
@@ -336,29 +337,31 @@
     // Canvas Confetti blast
     function triggerConfetti() {
       if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
-        });
+        try {
+          confetti({
+            particleCount: 80,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
+          });
 
-        setTimeout(() => {
-          confetti({
-            particleCount: 50,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#fb7185', '#f472b6', '#a855f7']
-          });
-          confetti({
-            particleCount: 50,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#fb7185', '#f472b6', '#a855f7']
-          });
-        }, 250);
+          setTimeout(() => {
+            confetti({
+              particleCount: 50,
+              angle: 60,
+              spread: 55,
+              origin: { x: 0 },
+              colors: ['#fb7185', '#f472b6', '#a855f7']
+            });
+            confetti({
+              particleCount: 50,
+              angle: 120,
+              spread: 55,
+              origin: { x: 1 },
+              colors: ['#fb7185', '#f472b6', '#a855f7']
+            });
+          }, 250);
+        } catch(e) { console.log('Confetti error:', e); }
       }
     }
 
@@ -376,18 +379,23 @@
     let siteStarted = false;
 
     function playAudioForSection(audioId) {
-      if (!siteStarted) return; // Don't play until user taps entry overlay
+      if (!siteStarted) return;
       const newAudio = document.getElementById(audioId);
       if (!newAudio || currentAudio === newAudio) return;
 
       if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
+        try {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+        } catch(e) {}
       }
 
       currentAudio = newAudio;
       currentAudio.volume = 0.5;
-      currentAudio.play().catch(err => console.log("Scroll audio autoplay prevented:", err));
+      const promise = currentAudio.play();
+      if (promise !== undefined) {
+        promise.catch(err => console.log("Audio play prevented:", err));
+      }
     }
 
     // Map Section IDs to Audio IDs
@@ -399,7 +407,7 @@
 
     const observerOptions = {
       root: null,
-      threshold: 0.4
+      threshold: 0.3
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -413,45 +421,40 @@
       });
     }, observerOptions);
 
-    // 1. Entrance tap to start experience & music
-    enterBtn.addEventListener('click', () => {
-      siteStarted = true;
-      playAudioForSection('audio-photos');
+    // 1. Entrance tap handler (Guaranteed Dismissal)
+    if (enterBtn) {
+      enterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        siteStarted = true;
 
-      triggerConfetti();
+        // Try playing audio safely
+        try {
+          playAudioForSection('audio-photos');
+        } catch(err) {
+          console.log('Audio start error:', err);
+        }
 
-      overlay.classList.add('opacity-0', 'pointer-events-none');
-      setTimeout(() => {
-        overlay.style.display = 'none';
-      }, 700);
-    });
+        // Trigger confetti
+        triggerConfetti();
+
+        // Hide overlay instantly
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+          }, 500);
+        }
+      });
+    }
 
     // 2. Surprise gift & voice note reveal
     let isRevealed = false;
-    surpriseBtn.addEventListener('click', () => {
-      // Lower background music volume while voice note plays
-      if (currentAudio) {
-        currentAudio.volume = 0.15;
-      }
+    if (surpriseBtn) {
+      surpriseBtn.addEventListener('click', () => {
+        if (currentAudio) {
+          currentAudio.volume = 0.15;
+        }
 
-      if (voiceNote) {
-        voiceNote.play().catch(e => console.log('Playback error:', e));
-
-        voiceNote.onended = () => {
-          if (currentAudio) currentAudio.volume = 0.5;
-        };
-      }
-
-      triggerConfetti();
-
-      if (!isRevealed) {
-        surpriseCard.classList.remove('hidden');
-        giftIcon.textContent = '💖';
-        giftPrompt.textContent = 'Opened with Love!';
-        isRevealed = true;
-      }
-    });
-
-    // Extra confetti button
-    const confettiBtn = document.getElementById('confettiBtn');
-    confettiBtn.addEventListener(
+        if (voiceNote) {
+          voiceNote
