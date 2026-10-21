@@ -20,7 +20,7 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
+    
     .font-handwriting {
       font-family: 'Caveat', cursive;
     }
@@ -81,12 +81,10 @@
 
 <body class="text-rose-950 relative selection:bg-rose-200 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] px-3 sm:px-0">
 
-  <!-- Background Audio Elements for Scroll Switcher -->
-  <audio id="audio-photos" preload="auto" loop>
-    <source src="Dhun Laagi AETrim1792581107931.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="audio-letter" preload="auto" loop>
-    <source src="Jigardan_Gadhavi_Kavya_Limaye_-_RAMO_RE_-_Navratri_2025_(mp3.pm) AETrim1792581502781.mp3" type="audio/mpeg">
+  <!-- Background Music Element -->
+  <audio id="bgSong" loop preload="auto">
+    <source src="background-song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
 
   <!-- Mobile-friendly Audio Tap Screen -->
@@ -95,7 +93,7 @@
       <div class="text-6xl animate-bounce">💌</div>
       <h2 class="text-3xl font-extrabold text-rose-800">A Surprise For My Betuu</h2>
       <p class="text-rose-500 font-medium text-sm">Turn up your volume for the full experience 🎶✨</p>
-      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
+      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition">
         Tap to Open 💖
       </button>
     </div>
@@ -106,8 +104,7 @@
   <!-- Main Content Wrapper -->
   <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 flex flex-col gap-16">
 
-    <!-- Section 1: Intro / Header -->
-    <section id="sec-intro" class="text-center space-y-4 min-h-[85vh] flex flex-col justify-center items-center">
+    <header class="text-center space-y-4">
       <div class="inline-flex items-center gap-2 bg-rose-100/80 border border-rose-200/60 px-4 py-1.5 rounded-full text-rose-600 text-sm font-semibold tracking-wide shadow-sm animate-bounce">
         <span>✨ IT'S YOUR SPECIAL DAY! ✨</span>
       </div>
@@ -126,17 +123,16 @@
           <span class="text-xl">🎉✨</span>
         </button>
       </div>
-    </section>
+    </header>
 
-    <!-- Section 2: Photos Gallery -->
-    <section id="sec-photos" class="space-y-6 pt-10">
+    <section class="space-y-6">
       <div class="text-center">
         <span class="text-rose-400 font-bold uppercase tracking-wider text-xs">Our Little Moments</span>
         <h2 class="text-2xl sm:text-3xl font-bold text-rose-900">Captured in My Heart 📸🧸</h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-4">
-
+        
         <!-- Polaroid Photo 1 -->
         <div class="polaroid bg-white p-4 rounded-2xl relative rotate-0 sm:rotate-[-2deg]">
           <div class="tape w-24 h-6 absolute -top-3 left-1/2 -translate-x-1/2 rotate-1"></div>
@@ -147,7 +143,7 @@
                  onerror="this.src='https://placehold.co/600x600/ffd1dc/9f1239?text=Our+Photo+Here'">
           </div>
           <div class="pt-4 text-center">
-            <p class="font-handwriting text-2xl text-rose-700">The day we couldn't stop blushing 🌸</p>
+            <p class="font-handwriting text-2xl text-rose-700">The day we couldn't stop laughing 🌸</p>
             <p class="text-xs text-rose-400 mt-0.5">5 July 2026 / Our first date</p>
           </div>
         </div>
@@ -197,101 +193,99 @@
       </div>
     </section>
 
-    <!-- Section 3: Love Letter & Voice Note -->
-    <section id="sec-letter" class="space-y-8 pt-10">
-      <div class="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 space-y-6">
-        <div class="flex items-center gap-3 border-b border-rose-100 pb-4">
-          <div class="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-xl">💌</div>
-          <div>
-            <h2 class="text-xl sm:text-2xl font-bold text-rose-900">A Letter for the Birthday Girl ✍️🎀</h2>
-            <p class="text-xs text-rose-400">Written straight from my heart</p>
-          </div>
-        </div>
-
-        <div class="space-y-4 text-rose-800 leading-relaxed text-base sm:text-lg">
-          <p>
-            <span class="font-handwriting text-3xl text-rose-500 font-bold block mb-1">Dearest Hastii,</span>
-            The first time I looked into your eyes after realizing I had a crush on you was pure nervousness, but also the sweetest, most wholesome moment. I felt like if I hugged you, I'd never want to let you go. I tried to talk to you in school so many times, but something always held me back from confessing. Even now that we're together, I still have that same crush on you, and I still fall for you all over again. 💕
-          </p>
-
-          <p>
-            I never imagined how far we would come in this relationship. We started as complete strangers, turned into best friends having random chats, and became everything to each other. I bet you didn't know that I used to note down every single detail you ever told me about yourself. I acted completely normal back then to hide my feelings, but that one confession changed my entire life. Thank you for choosing me, jaanu. 💞
-          </p>
-
-          <p>
-            My biggest dream is for us to keep growing like this and spend the rest of our lives together. I love you so much, more than words could ever describe. I hope this birthday is extra special and brings you endless happiness. HAPPY BIRTHDAY! 🫶🧿
-          </p>
-        </div>
-
-        <div class="pt-4 flex justify-end">
-          <div class="text-right">
-            <p class="font-handwriting text-3xl text-rose-600 font-bold">Forever yours,</p>
-            <p class="text-sm font-semibold text-rose-400 mt-1">Vanshuu❤️</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vinyl Player Display -->
-      <div class="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-rose-100 shadow-md">
-        <div class="flex flex-col sm:flex-row items-center gap-6">
-          <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-4 border-rose-200 flex items-center justify-center shadow-lg group">
-            <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white text-xs font-bold">
-              ❤️
-            </div>
-            <div class="absolute inset-0 rounded-full border border-white/20 animate-spin" style="animation-duration: 10s;"></div>
-          </div>
-
-          <div class="flex-1 text-center sm:text-left space-y-2">
-            <div class="flex items-center justify-center sm:justify-start gap-2">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-pink-100 text-pink-600">Now Playing</span>
-              <span class="text-xs text-rose-400">Track of our story</span>
-            </div>
-            <h3 class="text-lg font-bold text-rose-900">Ramo Re 🎶</h3>
-
-            <p class="font-handwriting text-xl text-rose-600">
-              "Mara tame shu thao cho ke aam haiyan na aangne ramo...." ✨
-            </p>
-
-            <div class="w-full bg-rose-100 h-2 rounded-full overflow-hidden mt-3">
-              <div class="bg-gradient-to-r from-rose-400 to-pink-500 h-full w-2/3 rounded-full"></div>
-            </div>
-            <div class="flex justify-between text-[11px] text-rose-400 pt-1 font-medium">
-              <span>2:14</span>
-              <span>Forever & Always ♾️</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Surprise Gift & Voice Note Section -->
-      <div class="bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-200 rounded-3xl p-6 sm:p-8 text-center space-y-6 shadow-sm">
+    <!-- Love Letter Section -->
+    <section class="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 space-y-6">
+      <div class="flex items-center gap-3 border-b border-rose-100 pb-4">
+        <div class="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-xl">💌</div>
         <div>
-          <h3 class="text-2xl font-bold text-rose-900">A Surprise Birthday Wish 🎁</h3>
-          <p class="text-sm text-rose-400 mt-1">Tap the present to open your surprise message!</p>
+          <h2 class="text-xl sm:text-2xl font-bold text-rose-900">A Letter for the Birthday Girl ✍️🎀</h2>
+          <p class="text-xs text-rose-400">Written straight from my heart</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-rose-800 leading-relaxed text-base sm:text-lg">
+        <p>
+          <span class="font-handwriting text-3xl text-rose-500 font-bold block mb-1">Dearest Hastii,</span>
+          The first time I looked into your eyes after realizing I had a crush on you was pure nervousness, but also the sweetest, most wholesome moment. I felt like if I hugged you, I'd never want to let you go. I tried to talk to you in school so many times, but something always held me back from confessing. Even now that we're together, I still have that same crush on you, and I still fall for you all over again. 💕
+        </p>
+
+        <p>
+          I never imagined how far we would come in this relationship. We started as complete strangers, turned into best friends having random chats, and became everything to each other. I bet you didn't know that I used to note down every single detail you ever told me about yourself. I acted completely normal back then to hide my feelings, but that one confession changed my entire life. Thank you for choosing me, jaanu. 💞
+        </p>
+
+        <p>
+          My biggest dream is for us to keep growing like this and spend the rest of our lives together. I love you so much, more than words could ever describe. I hope this birthday is extra special and brings you endless happiness. HAPPY BIRTHDAY! 🫶🧿
+        </p>
+      </div>
+
+      <div class="pt-4 flex justify-end">
+        <div class="text-right">
+          <p class="font-handwriting text-3xl text-rose-600 font-bold">Forever yours,</p>
+          <p class="text-sm font-semibold text-rose-400 mt-1">Vanshuu❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vinyl Player Display -->
+    <section class="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-rose-100 shadow-md">
+      <div class="flex flex-col sm:flex-row items-center gap-6">
+        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-4 border-rose-200 flex items-center justify-center shadow-lg group">
+          <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white text-xs font-bold">
+            ❤️
+          </div>
+          <div class="absolute inset-0 rounded-full border border-white/20 animate-spin" style="animation-duration: 10s;"></div>
         </div>
 
-        <div class="flex justify-center">
-          <button id="surpriseBtn" class="pulse-glow p-6 bg-white rounded-3xl shadow-lg border-2 border-rose-200 hover:scale-105 active:scale-95 transition cursor-pointer flex flex-col items-center gap-2">
-            <span id="giftIcon" class="text-5xl">🎁</span>
-            <span id="giftPrompt" class="text-sm font-semibold text-rose-600">Click to Unwrap!</span>
-          </button>
-        </div>
-
-        <!-- Surprise reveal card -->
-        <div id="surpriseCard" class="hidden bg-white p-6 rounded-2xl border border-pink-200 shadow-md max-w-lg mx-auto text-rose-800 space-y-4 transition-all duration-500">
-          <div class="text-3xl">🎂🎈🥳</div>
-          <h4 class="font-bold text-lg text-rose-900">A Message From My Heart 🎙️❤️</h4>
-          <p class="text-sm leading-relaxed text-rose-700">
-            May your year be filled with sweet adventures, cozy dates, endless laughter, and all your biggest dreams coming true! I promise to always be right by your side cheering for you. 💕✨
+        <div class="flex-1 text-center sm:text-left space-y-2">
+          <div class="flex items-center justify-center sm:justify-start gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-pink-100 text-pink-600">Now Playing</span>
+            <span class="text-xs text-rose-400">Track 01 of our story</span>
+          </div>
+          <h3 class="text-lg font-bold text-rose-900">Ramo Re 🎶</h3>
+          
+          <p class="font-handwriting text-xl text-rose-600">
+            "Mara tame shu thao cho ke aam haiyan na aangne ramo...." ✨
           </p>
 
-          <!-- Voice Note Player Controls -->
-          <div class="pt-2">
-            <audio id="voiceNote" controls class="w-full rounded-full border border-rose-200 bg-rose-50 accent-rose-500">
-              <source src="voicenote.mp3" type="audio/mpeg">
-              Your browser does not support audio.
-            </audio>
+          <div class="w-full bg-rose-100 h-2 rounded-full overflow-hidden mt-3">
+            <div class="bg-gradient-to-r from-rose-400 to-pink-500 h-full w-2/3 rounded-full"></div>
           </div>
+          <div class="flex justify-between text-[11px] text-rose-400 pt-1 font-medium">
+            <span>2:14</span>
+            <span>Forever & Always ♾️</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Surprise Gift & Voice Note Section -->
+    <section class="bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-200 rounded-3xl p-6 sm:p-8 text-center space-y-6 shadow-sm">
+      <div>
+        <h3 class="text-2xl font-bold text-rose-900">A Surprise Birthday Wish 🎁</h3>
+        <p class="text-sm text-rose-400 mt-1">Tap the present to open your surprise message!</p>
+      </div>
+
+      <div class="flex justify-center">
+        <button id="surpriseBtn" class="pulse-glow p-6 bg-white rounded-3xl shadow-lg border-2 border-rose-200 hover:scale-105 active:scale-95 transition cursor-pointer flex flex-col items-center gap-2">
+          <span id="giftIcon" class="text-5xl">🎁</span>
+          <span id="giftPrompt" class="text-sm font-semibold text-rose-600">Click to Unwrap!</span>
+        </button>
+      </div>
+
+      <!-- Surprise reveal card -->
+      <div id="surpriseCard" class="hidden bg-white p-6 rounded-2xl border border-pink-200 shadow-md max-w-lg mx-auto text-rose-800 space-y-4 transition-all duration-500">
+        <div class="text-3xl">🎂🎈🥳</div>
+        <h4 class="font-bold text-lg text-rose-900">A Message From My Heart 🎙️❤️</h4>
+        <p class="text-sm leading-relaxed text-rose-700">
+          May your year be filled with sweet adventures, cozy dates, endless laughter, and all your biggest dreams coming true! I promise to always be right by your side cheering for you. 💕✨
+        </p>
+
+        <!-- Voice Note Player Controls -->
+        <div class="pt-2">
+          <audio id="voiceNote" controls class="w-full rounded-full border border-rose-200 bg-rose-50 accent-rose-500">
+            <source src="voicenote.mp3" type="audio/mpeg">
+            Your browser does not support audio.
+          </audio>
         </div>
       </div>
     </section>
@@ -318,7 +312,6 @@
     // Floating hearts generator
     function createFloatingHearts() {
       const container = document.getElementById('heart-container');
-      if (!container) return;
       const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
       const count = 18;
 
@@ -337,123 +330,94 @@
     // Canvas Confetti blast
     function triggerConfetti() {
       if (typeof confetti === 'function') {
-        try {
-          confetti({
-            particleCount: 80,
-            spread: 70,
-            origin: { y: 0.6 },
-            colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
-          });
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
+        });
 
-          setTimeout(() => {
-            confetti({
-              particleCount: 50,
-              angle: 60,
-              spread: 55,
-              origin: { x: 0 },
-              colors: ['#fb7185', '#f472b6', '#a855f7']
-            });
-            confetti({
-              particleCount: 50,
-              angle: 120,
-              spread: 55,
-              origin: { x: 1 },
-              colors: ['#fb7185', '#f472b6', '#a855f7']
-            });
-          }, 250);
-        } catch(e) { console.log('Confetti error:', e); }
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#fb7185', '#f472b6', '#a855f7']
+          });
+          confetti({
+            particleCount: 50,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#fb7185', '#f472b6', '#a855f7']
+          });
+        }, 250);
       }
     }
 
-    // UI references
+    // Audio elements & UI references
     const enterBtn = document.getElementById('enterSiteBtn');
     const overlay = document.getElementById('entryOverlay');
+    const bgSong = document.getElementById('bgSong');
     const surpriseBtn = document.getElementById('surpriseBtn');
     const surpriseCard = document.getElementById('surpriseCard');
     const giftIcon = document.getElementById('giftIcon');
     const giftPrompt = document.getElementById('giftPrompt');
     const voiceNote = document.getElementById('voiceNote');
 
-    let currentAudio = null;
-    let siteStarted = false;
-
-    function playAudioForSection(audioId) {
-      if (!siteStarted) return;
-      const newAudio = document.getElementById(audioId);
-      if (!newAudio || currentAudio === newAudio) return;
-
-      if (currentAudio) {
-        try {
-          currentAudio.pause();
-          currentAudio.currentTime = 0;
-        } catch(e) {}
-      }
-
-      currentAudio = newAudio;
-      currentAudio.volume = 0.5;
-      const promise = currentAudio.play();
-      if (promise !== undefined) {
-        promise.catch(err => console.log("Audio play prevented:", err));
-      }
-    }
-
-    const sectionAudioMap = {
-      'sec-intro': 'audio-photos',
-      'sec-photos': 'audio-photos',
-      'sec-letter': 'audio-letter'
-    };
-
-    const observerOptions = {
-      root: null,
-      threshold: 0.3
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const audioId = sectionAudioMap[entry.target.id];
-          if (audioId) {
-            playAudioForSection(audioId);
-          }
-        }
-      });
-    }, observerOptions);
-
-    // Function to handle opening the site (triggered by touch or click)
-    function handleSiteUnlock(e) {
-      if (e) e.preventDefault();
-      if (siteStarted) return;
-      siteStarted = true;
-
-      try {
-        playAudioForSection('audio-photos');
-      } catch(err) {
-        console.log('Audio start error:', err);
+    // 1. Entrance tap to start music
+    enterBtn.addEventListener('click', () => {
+      if (bgSong) {
+        bgSong.volume = 0.5;
+        bgSong.play().catch(err => console.log('Audio autoplay blocked:', err));
       }
 
       triggerConfetti();
 
-      if (overlay) {
-        overlay.style.opacity = '0';
-        overlay.style.pointerEvents = 'none';
-        setTimeout(() => {
-          overlay.style.display = 'none';
-        }, 500);
-      }
-    }
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 700);
+    });
 
-    // Bind BOTH click and touchend so mobile triggers instantly without delay
-    if (enterBtn) {
-      enterBtn.addEventListener('click', handleSiteUnlock);
-      enterBtn.addEventListener('touchend', handleSiteUnlock, { passive: false });
-    }
-
+    // 2. Surprise gift & voice note reveal
     let isRevealed = false;
-    if (surpriseBtn) {
-      surpriseBtn.addEventListener('click', () => {
-        if (currentAudio) {
-          currentAudio.volume = 0.15;
-        }
+    surpriseBtn.addEventListener('click', () => {
+      // Lower background music volume while voice note plays
+      if (bgSong) {
+        bgSong.volume = 0.15;
+      }
 
-        if (voiceNote) {
-          voiceNote
+      if (voiceNote) {
+        voiceNote.play().catch(e => console.log('Playback error:', e));
+        
+        // Restore music volume once voice note finishes
+        voiceNote.onended = () => {
+          if (bgSong) bgSong.volume = 0.5;
+        };
+      }
+
+      triggerConfetti();
+
+      if (!isRevealed) {
+        surpriseCard.classList.remove('hidden');
+        giftIcon.textContent = '💖';
+        giftPrompt.textContent = 'Opened with Love!';
+        isRevealed = true;
+      }
+    });
+
+    // Extra confetti button
+    const confettiBtn = document.getElementById('confettiBtn');
+    confettiBtn.addEventListener('click', () => {
+      triggerConfetti();
+    });
+
+    // Load initialization
+    window.addEventListener('load', () => {
+      createFloatingHearts();
+    });
+  </script>
+</body>
+</html>
