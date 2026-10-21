@@ -374,7 +374,6 @@
     const giftPrompt = document.getElementById('giftPrompt');
     const voiceNote = document.getElementById('voiceNote');
 
-    // Scroll-based dynamic audio switcher variables
     let currentAudio = null;
     let siteStarted = false;
 
@@ -398,7 +397,6 @@
       }
     }
 
-    // Map Section IDs to Audio IDs
     const sectionAudioMap = {
       'sec-intro': 'audio-photos',
       'sec-photos': 'audio-photos',
@@ -421,34 +419,35 @@
       });
     }, observerOptions);
 
-    // 1. Entrance tap handler (Guaranteed Dismissal)
-    if (enterBtn) {
-      enterBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        siteStarted = true;
+    // Function to handle opening the site (triggered by touch or click)
+    function handleSiteUnlock(e) {
+      if (e) e.preventDefault();
+      if (siteStarted) return;
+      siteStarted = true;
 
-        // Try playing audio safely
-        try {
-          playAudioForSection('audio-photos');
-        } catch(err) {
-          console.log('Audio start error:', err);
-        }
+      try {
+        playAudioForSection('audio-photos');
+      } catch(err) {
+        console.log('Audio start error:', err);
+      }
 
-        // Trigger confetti
-        triggerConfetti();
+      triggerConfetti();
 
-        // Hide overlay instantly
-        if (overlay) {
-          overlay.style.opacity = '0';
-          overlay.style.pointerEvents = 'none';
-          setTimeout(() => {
-            overlay.style.display = 'none';
-          }, 500);
-        }
-      });
+      if (overlay) {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 500);
+      }
     }
 
-    // 2. Surprise gift & voice note reveal
+    // Bind BOTH click and touchend so mobile triggers instantly without delay
+    if (enterBtn) {
+      enterBtn.addEventListener('click', handleSiteUnlock);
+      enterBtn.addEventListener('touchend', handleSiteUnlock, { passive: false });
+    }
+
     let isRevealed = false;
     if (surpriseBtn) {
       surpriseBtn.addEventListener('click', () => {
