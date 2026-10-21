@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Happy Birthday My Betuuu! 💖✨</title>
-
+  <title>Happy Birthday My Betuu! 💖✨</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
+  <!-- Google Fonts: Caveat & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -25,6 +25,7 @@
       font-family: 'Caveat', cursive;
     }
 
+    /* Floating hearts background animation */
     .floating-heart {
       position: fixed;
       pointer-events: none;
@@ -38,14 +39,19 @@
         transform: translateY(110vh) scale(0.6) rotate(0deg);
         opacity: 0;
       }
-      20% { opacity: 0.7; }
-      80% { opacity: 0.7; }
+      20% {
+        opacity: 0.7;
+      }
+      80% {
+        opacity: 0.7;
+      }
       100% {
         transform: translateY(-10vh) scale(1.1) rotate(360deg);
         opacity: 0;
       }
     }
 
+    /* Polaroid pin and tilt effects */
     .polaroid {
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 10px 25px -5px rgba(244, 114, 182, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
@@ -55,15 +61,16 @@
       box-shadow: 0 20px 30px -10px rgba(244, 114, 182, 0.4);
     }
 
+    /* Soft pulse glow */
     @keyframes pulseGlow {
       0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.4)); }
       50% { transform: scale(1.05); filter: drop-shadow(0 0 22px rgba(244, 114, 182, 0.7)); }
     }
-
     .pulse-glow {
       animation: pulseGlow 2.5s infinite ease-in-out;
     }
 
+    /* Tape effect for photos */
     .tape {
       background-color: rgba(255, 255, 255, 0.7);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -74,22 +81,19 @@
 
 <body class="text-rose-950 relative selection:bg-rose-200 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] px-3 sm:px-0">
 
-  <!-- Background Audios -->
-  <audio id="audio-photos" preload="metadata" loop>
-    <source src="Dhun Laagi AETrim1792581107931.mp3" type="audio/mpeg">
+  <!-- Background Music Element -->
+  <audio id="bgSong" loop preload="auto">
+    <source src="Raataan Lambiyan Shershaah 128 Kbps.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
 
-  <audio id="audio-letter" preload="metadata" loop>
-    <source src="Jigardan_Gadhavi_Kavya_Limaye_-_RAMO_RE_-_Navratri_2025_(mp3.pm) AETrim1792581502781.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Tap to Open Overlay Screen -->
-  <div id="entryOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-rose-50/95 backdrop-blur-md transition-opacity duration-500">
+  <!-- Mobile-friendly Audio Tap Screen -->
+  <div id="entryOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-rose-50/95 backdrop-blur-md transition-opacity duration-700">
     <div class="text-center space-y-4 px-6 max-w-sm">
       <div class="text-6xl animate-bounce">💌</div>
       <h2 class="text-3xl font-extrabold text-rose-800">A Surprise For My Betuu</h2>
       <p class="text-rose-500 font-medium text-sm">Turn up your volume for the full experience 🎶✨</p>
-      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
+      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition">
         Tap to Open 💖
       </button>
     </div>
@@ -97,8 +101,10 @@
 
   <div id="heart-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
+  <!-- Main Content Wrapper -->
   <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 flex flex-col gap-16">
-    <section id="sec-intro" class="text-center space-y-4 min-h-[85vh] flex flex-col justify-center items-center">
+
+    <header class="text-center space-y-4">
       <div class="inline-flex items-center gap-2 bg-rose-100/80 border border-rose-200/60 px-4 py-1.5 rounded-full text-rose-600 text-sm font-semibold tracking-wide shadow-sm animate-bounce">
         <span>✨ IT'S YOUR SPECIAL DAY! ✨</span>
       </div>
@@ -117,19 +123,24 @@
           <span class="text-xl">🎉✨</span>
         </button>
       </div>
-    </section>
+    </header>
 
-    <section id="sec-photos" class="space-y-6 pt-10">
+    <section class="space-y-6">
       <div class="text-center">
         <span class="text-rose-400 font-bold uppercase tracking-wider text-xs">Our Little Moments</span>
         <h2 class="text-2xl sm:text-3xl font-bold text-rose-900">Captured in My Heart 📸🧸</h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-4">
+
+        <!-- Polaroid Photo 1 -->
         <div class="polaroid bg-white p-4 rounded-2xl relative rotate-0 sm:rotate-[-2deg]">
           <div class="tape w-24 h-6 absolute -top-3 left-1/2 -translate-x-1/2 rotate-1"></div>
           <div class="aspect-square w-full overflow-hidden rounded-xl bg-rose-50">
-            <img src="Snapchat-1296080524.jpg" alt="Memorable Moment 1" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" onerror="this.src='https://placehold.co/600x600/ffd1dc/9f1239?text=Our+Photo+Here'">
+            <img src="Snapchat-1296080524.jpg" 
+                 alt="Memorable Moment 1" 
+                 class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                 onerror="this.src='https://placehold.co/600x600/ffd1dc/9f1239?text=Our+Photo+Here'">
           </div>
           <div class="pt-4 text-center">
             <p class="font-handwriting text-2xl text-rose-700">The day we couldn't stop blushing 🌸</p>
@@ -137,10 +148,14 @@
           </div>
         </div>
 
+        <!-- Polaroid Photo 2 -->
         <div class="polaroid bg-white p-4 rounded-2xl relative rotate-0 sm:rotate-[2.5deg]">
           <div class="tape w-24 h-6 absolute -top-3 left-1/2 -translate-x-1/2 -rotate-2"></div>
           <div class="aspect-square w-full overflow-hidden rounded-xl bg-rose-50">
-            <img src="Snapchat-240306934.jpg" alt="Memorable Moment 2" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" onerror="this.src='https://placehold.co/600x600/fce7f3/9d174d?text=Our+Photo+Here'">
+            <img src="Snapchat-240306934.jpg" 
+                 alt="Memorable Moment 2" 
+                 class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                 onerror="this.src='https://placehold.co/600x600/fce7f3/9d174d?text=Our+Photo+Here'">
           </div>
           <div class="pt-4 text-center">
             <p class="font-handwriting text-2xl text-rose-700">My favorite smile in the world 💕</p>
@@ -148,19 +163,25 @@
           </div>
         </div>
 
+        <!-- Polaroid Photo 3 -->
         <div class="polaroid bg-white p-4 rounded-2xl relative rotate-0 sm:rotate-[-1.5deg] sm:col-span-2 md:col-span-1 sm:max-w-xs sm:mx-auto md:max-w-none">
           <div class="tape w-24 h-6 absolute -top-3 left-1/2 -translate-x-1/2 rotate-3"></div>
           <div class="aspect-square w-full overflow-hidden rounded-xl bg-rose-50">
-            <img src="Snapchat-1417095685.jpg" alt="Unforgettable Moment 3" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" onerror="this.src='https://placehold.co/600x600/fbcfe8/831843?text=Our+Photo+Here'">
+            <img src="Snapchat-1417095685.jpg" 
+                 alt="Unforgettable Moment 3" 
+                 class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                 onerror="this.src='https://placehold.co/600x600/fbcfe8/831843?text=Our+Photo+Here'">
           </div>
           <div class="pt-4 text-center">
             <p class="font-handwriting text-2xl text-rose-700">Just us being silly together 🧸✨</p>
             <p class="text-xs text-rose-400 mt-0.5">Best adventures</p>
           </div>
         </div>
+
       </div>
     </section>
 
+    <!-- Lyrics Section -->
     <section class="bg-gradient-to-r from-rose-200/50 via-pink-200/40 to-purple-200/50 p-6 sm:p-8 rounded-3xl border border-pink-200 shadow-sm relative overflow-hidden text-center">
       <span class="absolute -right-4 -bottom-4 text-7xl select-none opacity-20">🎶</span>
       <div class="max-w-xl mx-auto space-y-2">
@@ -172,109 +193,99 @@
       </div>
     </section>
 
-    <section id="sec-letter" class="space-y-8 pt-10">
-      <div class="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 space-y-6">
-        <div class="flex items-center gap-3 border-b border-rose-100 pb-4">
-          <div class="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-xl">💌</div>
-          <div>
-            <h2 class="text-xl sm:text-2xl font-bold text-rose-900">A Letter for the Birthday Girl ✍️🎀</h2>
-            <p class="text-xs text-rose-400">Written straight from my heart</p>
-          </div>
-        </div>
-
-        <div class="space-y-4 text-rose-800 leading-relaxed text-base sm:text-lg">
-          <p>
-            <span class="font-handwriting text-3xl text-rose-500 font-bold block mb-1">Dearest Hastii,</span>
-            The first time I looked into your eyes after realizing I had a crush on you was pure nervousness, but also the sweetest, most wholesome moment. I felt like if I hugged you, I'd never want to let you go. I tried to talk to you in school so many times, but something always held me back from confessing. Even now that we're together, I still have that same crush on you, and I still fall for you all over again. 💕
-          </p>
-
-          <p>
-            I never imagined how far we would come in this relationship. We started as complete strangers, turned into best friends having random chats, and became everything to each other. I bet you didn't know that I used to note down every single detail you ever told me about yourself. I acted completely normal back then to hide my feelings, but that one confession changed my entire life. Thank you for choosing me, jaanu. 💞
-          </p>
-
-          <div class="pt-3 pb-2 text-center">
-            <button id="letterSurpriseBtn" class="pulse-glow inline-flex items-center gap-2 bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
-              <span id="letterGiftIcon" class="text-2xl">🎁</span>
-              <span id="letterGiftPrompt" class="text-sm">Tap for a special birthday wish! 💖</span>
-            </button>
-
-            <div id="letterSurpriseCard" class="hidden mt-4 p-5 rounded-2xl bg-rose-50 border border-pink-200 text-center max-w-lg mx-auto transition-all duration-300">
-              <p class="font-handwriting text-2xl sm:text-3xl text-rose-600 font-bold leading-snug">
-                "You are my favourite person today, tomorrow & every day that follows! 🫶💖💘🎀"
-              </p>
-            </div>
-          </div>
-
-          <p>
-            My biggest dream is for us to keep growing like this and spend the rest of our lives together. I love you so much, more than words could ever describe. I hope this birthday is extra special and brings you endless happiness. HAPPY BIRTHDAY! 🫶🧿
-          </p>
-        </div>
-
-        <div class="pt-4 flex justify-end">
-          <div class="text-right">
-            <p class="font-handwriting text-3xl text-rose-600 font-bold">Forever yours,</p>
-            <p class="text-sm font-semibold text-rose-400 mt-1">Vanshuu❤️</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-rose-100 shadow-md">
-        <div class="flex flex-col sm:flex-row items-center gap-6">
-          <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-4 border-rose-200 flex items-center justify-center shadow-lg group">
-            <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white text-xs font-bold">
-              ❤️
-            </div>
-            <div class="absolute inset-0 rounded-full border border-white/20 animate-spin" style="animation-duration: 10s;"></div>
-          </div>
-
-          <div class="flex-1 text-center sm:text-left space-y-2">
-            <div class="flex items-center justify-center sm:justify-start gap-2">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-pink-100 text-pink-600">Now Playing</span>
-              <span class="text-xs text-rose-400">Track of our story</span>
-            </div>
-            <h3 class="text-lg font-bold text-rose-900">Ramo Re 🎶</h3>
-
-            <p class="font-handwriting text-xl text-rose-600">
-              "Mara tame shu thao cho ke aam haiyan na aangne ramo...." ✨
-            </p>
-
-            <div class="w-full bg-rose-100 h-2 rounded-full overflow-hidden mt-3">
-              <div class="bg-gradient-to-r from-rose-400 to-pink-500 h-full w-2/3 rounded-full"></div>
-            </div>
-            <div class="flex justify-between text-[11px] text-rose-400 pt-1 font-medium">
-              <span>2:14</span>
-              <span>Forever & Always ♾️</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-200 rounded-3xl p-6 sm:p-8 text-center space-y-6 shadow-sm">
+    <!-- Love Letter Section -->
+    <section class="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 space-y-6">
+      <div class="flex items-center gap-3 border-b border-rose-100 pb-4">
+        <div class="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-xl">💌</div>
         <div>
-          <h3 class="text-2xl font-bold text-rose-900">A Surprise Birthday Wish 🎁</h3>
-          <p class="text-sm text-rose-400 mt-1">Tap the present to open your surprise message!</p>
+          <h2 class="text-xl sm:text-2xl font-bold text-rose-900">A Letter for the Birthday Girl ✍️🎀</h2>
+          <p class="text-xs text-rose-400">Written straight from my heart</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-rose-800 leading-relaxed text-base sm:text-lg">
+        <p>
+          <span class="font-handwriting text-3xl text-rose-500 font-bold block mb-1">Dearest Hastii,</span>
+          The first time I looked into your eyes after realizing I had a crush on you was pure nervousness, but also the sweetest, most wholesome moment. I felt like if I hugged you, I'd never want to let you go. I tried to talk to you in school so many times, but something always held me back from confessing. Even now that we're together, I still have that same crush on you, and I still fall for you all over again. 💕
+        </p>
+
+        <p>
+          I never imagined how far we would come in this relationship. We started as complete strangers, turned into best friends having random chats, and became everything to each other. I bet you didn't know that I used to note down every single detail you ever told me about yourself. I acted completely normal back then to hide my feelings, but that one confession changed my entire life. Thank you for choosing me, jaanu. 💞
+        </p>
+
+        <p>
+          My biggest dream is for us to keep growing like this and spend the rest of our lives together. I love you so much, more than words could ever describe. I hope this birthday is extra special and brings you endless happiness. HAPPY BIRTHDAY! 🫶🧿
+        </p>
+      </div>
+
+      <div class="pt-4 flex justify-end">
+        <div class="text-right">
+          <p class="font-handwriting text-3xl text-rose-600 font-bold">Forever yours,</p>
+          <p class="text-sm font-semibold text-rose-400 mt-1">Vanshuu❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vinyl Player Display -->
+    <section class="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-rose-100 shadow-md">
+      <div class="flex flex-col sm:flex-row items-center gap-6">
+        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-4 border-rose-200 flex items-center justify-center shadow-lg group">
+          <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white text-xs font-bold">
+            ❤️
+          </div>
+          <div class="absolute inset-0 rounded-full border border-white/20 animate-spin" style="animation-duration: 10s;"></div>
         </div>
 
-        <div class="flex justify-center">
-          <button id="surpriseBtn" class="pulse-glow p-6 bg-white rounded-3xl shadow-lg border-2 border-rose-200 hover:scale-105 active:scale-95 transition cursor-pointer flex flex-col items-center gap-2">
-            <span id="giftIcon" class="text-5xl">🎁</span>
-            <span id="giftPrompt" class="text-sm font-semibold text-rose-600">Click to Unwrap!</span>
-          </button>
-        </div>
+        <div class="flex-1 text-center sm:text-left space-y-2">
+          <div class="flex items-center justify-center sm:justify-start gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-pink-100 text-pink-600">Now Playing</span>
+            <span class="text-xs text-rose-400">Track 01 of our story</span>
+          </div>
+          <h3 class="text-lg font-bold text-rose-900">Ramo Re 🎶</h3>
 
-        <div id="surpriseCard" class="hidden bg-white p-6 rounded-2xl border border-pink-200 shadow-md max-w-lg mx-auto text-rose-800 space-y-4 transition-all duration-500">
-          <div class="text-3xl">🎂🎈🥳</div>
-          <h4 class="font-bold text-lg text-rose-900">A Message From My Heart 🎙️❤️</h4>
-          <p class="text-sm leading-relaxed text-rose-700">
-            May your year be filled with sweet adventures, cozy dates, endless laughter, and all your biggest dreams coming true! I promise to always be right by your side cheering for you. 💕✨
+          <p class="font-handwriting text-xl text-rose-600">
+            "Mara tame shu thao cho ke aam haiyan na aangne ramo...." ✨
           </p>
 
-          <div class="pt-2">
-            <audio id="voiceNote" controls class="w-full rounded-full border border-rose-200 bg-rose-50 accent-rose-500">
-              <source src="voicenote.mp3" type="audio/mpeg">
-              Your browser does not support audio.
-            </audio>
+          <div class="w-full bg-rose-100 h-2 rounded-full overflow-hidden mt-3">
+            <div class="bg-gradient-to-r from-rose-400 to-pink-500 h-full w-2/3 rounded-full"></div>
           </div>
+          <div class="flex justify-between text-[11px] text-rose-400 pt-1 font-medium">
+            <span>2:14</span>
+            <span>Forever & Always ♾️</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Surprise Gift & Voice Note Section -->
+    <section class="bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-200 rounded-3xl p-6 sm:p-8 text-center space-y-6 shadow-sm">
+      <div>
+        <h3 class="text-2xl font-bold text-rose-900">A Surprise Birthday Wish 🎁</h3>
+        <p class="text-sm text-rose-400 mt-1">Tap the present to open your surprise message!</p>
+      </div>
+
+      <div class="flex justify-center">
+        <button id="surpriseBtn" class="pulse-glow p-6 bg-white rounded-3xl shadow-lg border-2 border-rose-200 hover:scale-105 active:scale-95 transition cursor-pointer flex flex-col items-center gap-2">
+          <span id="giftIcon" class="text-5xl">🎁</span>
+          <span id="giftPrompt" class="text-sm font-semibold text-rose-600">Click to Unwrap!</span>
+        </button>
+      </div>
+
+      <!-- Surprise reveal card -->
+      <div id="surpriseCard" class="hidden bg-white p-6 rounded-2xl border border-pink-200 shadow-md max-w-lg mx-auto text-rose-800 space-y-4 transition-all duration-500">
+        <div class="text-3xl">🎂🎈🥳</div>
+        <h4 class="font-bold text-lg text-rose-900">A Message From My Heart 🎙️❤️</h4>
+        <p class="text-sm leading-relaxed text-rose-700">
+          May your year be filled with sweet adventures, cozy dates, endless laughter, and all your biggest dreams coming true! I promise to always be right by your side cheering for you. 💕✨
+        </p>
+
+        <!-- Voice Note Player Controls -->
+        <div class="pt-2">
+          <audio id="voiceNote" controls class="w-full rounded-full border border-rose-200 bg-rose-50 accent-rose-500">
+            <source src="voicenote.mp3" type="audio/mpeg">
+            Your browser does not support audio.
+          </audio>
         </div>
       </div>
     </section>
@@ -294,24 +305,17 @@
         Made with ❤️ specially for you
       </p>
     </footer>
+
   </main>
 
   <script>
-    // Safe confetti helper
-    function safeConfetti(options) {
-      if (typeof confetti === 'function') {
-        try {
-          confetti(options);
-        } catch (e) {}
-      }
-    }
-
-    // Floating hearts background
+    // Floating hearts generator
     function createFloatingHearts() {
       const container = document.getElementById('heart-container');
-      if (!container) return;
       const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
-      for (let i = 0; i < 18; i++) {
+      const count = 18;
+
+      for (let i = 0; i < count; i++) {
         const heart = document.createElement('div');
         heart.className = 'floating-heart';
         heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -323,103 +327,97 @@
       }
     }
 
-    // Standard Confetti
+    // Canvas Confetti blast
     function triggerConfetti() {
-      safeConfetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
-      });
-      setTimeout(() => {
-        safeConfetti({ particleCount: 45, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#fb7185', '#f472b6', '#a855f7'] });
-        safeConfetti({ particleCount: 45, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#fb7185', '#f472b6', '#a855f7'] });
-      }, 200);
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
+        });
+
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#fb7185', '#f472b6', '#a855f7']
+          });
+          confetti({
+            particleCount: 50,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#fb7185', '#f472b6', '#a855f7']
+          });
+        }, 250);
+      }
     }
 
-    // DOM Elements
+    // Audio elements & UI references
     const enterBtn = document.getElementById('enterSiteBtn');
     const overlay = document.getElementById('entryOverlay');
-    const bgSongPhotos = document.getElementById('audio-photos');
-    const bgSongLetter = document.getElementById('audio-letter');
-    const confettiBtn = document.getElementById('confettiBtn');
-    const letterBtn = document.getElementById('letterSurpriseBtn');
-    const letterCard = document.getElementById('letterSurpriseCard');
-    const letterIcon = document.getElementById('letterGiftIcon');
-    const letterPrompt = document.getElementById('letterGiftPrompt');
+    const bgSong = document.getElementById('bgSong');
     const surpriseBtn = document.getElementById('surpriseBtn');
     const surpriseCard = document.getElementById('surpriseCard');
     const giftIcon = document.getElementById('giftIcon');
     const giftPrompt = document.getElementById('giftPrompt');
     const voiceNote = document.getElementById('voiceNote');
 
-    // 1. Entrance Tap to Open (Guaranteed to dismiss instantly)
-    if (enterBtn && overlay) {
-      enterBtn.addEventListener('click', () => {
-        // Step 1: Remove overlay immediately
-        overlay.classList.add('opacity-0', 'pointer-events-none');
-        setTimeout(() => {
-          overlay.style.display = 'none';
-        }, 500);
+    // 1. Entrance tap to start music
+    enterBtn.addEventListener('click', () => {
+      if (bgSong) {
+        bgSong.volume = 0.5;
+        bgSong.play().catch(err => console.log('Audio autoplay blocked:', err));
+      }
 
-        // Step 2: Attempt music playback safely
-        if (bgSongPhotos) {
-          bgSongPhotos.volume = 0.5;
-          bgSongPhotos.play().catch(() => {});
-        }
+      triggerConfetti();
 
-        // Step 3: Throw confetti
-        triggerConfetti();
-      });
-    }
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 700);
+    });
 
-    // 2. Confetti button
-    if (confettiBtn) {
-      confettiBtn.addEventListener('click', triggerConfetti);
-    }
+    // 2. Surprise gift & voice note reveal
+    let isRevealed = false;
+    surpriseBtn.addEventListener('click', () => {
+      // Lower background music volume while voice note plays
+      if (bgSong) {
+        bgSong.volume = 0.15;
+      }
 
-    // 3. Love letter surprise button
-    let letterOpened = false;
-    if (letterBtn) {
-      letterBtn.addEventListener('click', () => {
-        triggerConfetti();
-        if (!letterOpened && letterCard) {
-          letterCard.classList.remove('hidden');
-          if (letterIcon) letterIcon.textContent = '🫶';
-          if (letterPrompt) letterPrompt.textContent = 'Special Wish for Hastii! 💖';
-          letterOpened = true;
-        }
-      });
-    }
+      if (voiceNote) {
+        voiceNote.play().catch(e => console.log('Playback error:', e));
 
-    // 4. Bottom Surprise gift & Voice note
-    let giftOpened = false;
-    if (surpriseBtn) {
-      surpriseBtn.addEventListener('click', () => {
-        if (bgSongPhotos) bgSongPhotos.volume = 0.15;
-        if (bgSongLetter) bgSongLetter.volume = 0.15;
+        // Restore music volume once voice note finishes
+        voiceNote.onended = () => {
+          if (bgSong) bgSong.volume = 0.5;
+        };
+      }
 
-        if (voiceNote) {
-          voiceNote.play().catch(() => {});
-          voiceNote.onended = () => {
-            if (bgSongPhotos) bgSongPhotos.volume = 0.5;
-            if (bgSongLetter) bgSongLetter.volume = 0.5;
-          };
-        }
+      triggerConfetti();
 
-        triggerConfetti();
+      if (!isRevealed) {
+        surpriseCard.classList.remove('hidden');
+        giftIcon.textContent = '💖';
+        giftPrompt.textContent = 'Opened with Love!';
+        isRevealed = true;
+      }
+    });
 
-        if (!giftOpened && surpriseCard) {
-          surpriseCard.classList.remove('hidden');
-          if (giftIcon) giftIcon.textContent = '💖';
-          if (giftPrompt) giftPrompt.textContent = 'Opened with Love!';
-          giftOpened = true;
-        }
-      });
-    }
+    // Extra confetti button
+    const confettiBtn = document.getElementById('confettiBtn');
+    confettiBtn.addEventListener('click', () => {
+      triggerConfetti();
+    });
 
-    // Start hearts animation
-    window.addEventListener('load', createFloatingHearts);
+    // Load initialization
+    window.addEventListener('load', () => {
+      createFloatingHearts();
+    });
   </script>
 </body>
-</html>
+  </html>
