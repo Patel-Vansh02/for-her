@@ -38,12 +38,8 @@
         transform: translateY(110vh) scale(0.6) rotate(0deg);
         opacity: 0;
       }
-      20% {
-        opacity: 0.7;
-      }
-      80% {
-        opacity: 0.7;
-      }
+      20% { opacity: 0.7; }
+      80% { opacity: 0.7; }
       100% {
         transform: translateY(-10vh) scale(1.1) rotate(360deg);
         opacity: 0;
@@ -54,7 +50,6 @@
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 10px 25px -5px rgba(244, 114, 182, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
     }
-
     .polaroid:hover {
       transform: translateY(-8px) scale(1.02) rotate(0deg) !important;
       box-shadow: 0 20px 30px -10px rgba(244, 114, 182, 0.4);
@@ -78,6 +73,8 @@
 </head>
 
 <body class="text-rose-950 relative selection:bg-rose-200 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] px-3 sm:px-0">
+
+  <!-- Background Audios -->
   <audio id="audio-photos" preload="metadata" loop>
     <source src="Dhun Laagi AETrim1792581107931.mp3" type="audio/mpeg">
   </audio>
@@ -85,6 +82,18 @@
   <audio id="audio-letter" preload="metadata" loop>
     <source src="Jigardan_Gadhavi_Kavya_Limaye_-_RAMO_RE_-_Navratri_2025_(mp3.pm) AETrim1792581502781.mp3" type="audio/mpeg">
   </audio>
+
+  <!-- Tap to Open Overlay Screen -->
+  <div id="entryOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-rose-50/95 backdrop-blur-md transition-opacity duration-500">
+    <div class="text-center space-y-4 px-6 max-w-sm">
+      <div class="text-6xl animate-bounce">💌</div>
+      <h2 class="text-3xl font-extrabold text-rose-800">A Surprise For My Betuu</h2>
+      <p class="text-rose-500 font-medium text-sm">Turn up your volume for the full experience 🎶✨</p>
+      <button id="enterSiteBtn" class="mt-4 w-full bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
+        Tap to Open 💖
+      </button>
+    </div>
+  </div>
 
   <div id="heart-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
@@ -260,8 +269,6 @@
             May your year be filled with sweet adventures, cozy dates, endless laughter, and all your biggest dreams coming true! I promise to always be right by your side cheering for you. 💕✨
           </p>
 
-          <div id="voiceNoteStatus" class="hidden text-xs text-rose-500 font-medium"></div>
-
           <div class="pt-2">
             <audio id="voiceNote" controls class="w-full rounded-full border border-rose-200 bg-rose-50 accent-rose-500">
               <source src="voicenote.mp3" type="audio/mpeg">
@@ -290,25 +297,21 @@
   </main>
 
   <script>
-    // Safe helper for confetti
+    // Safe confetti helper
     function safeConfetti(options) {
       if (typeof confetti === 'function') {
         try {
           confetti(options);
-        } catch (e) {
-          console.warn('Confetti error:', e);
-        }
+        } catch (e) {}
       }
     }
 
-    // Floating hearts generator
+    // Floating hearts background
     function createFloatingHearts() {
       const container = document.getElementById('heart-container');
       if (!container) return;
       const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
-      const count = 18;
-
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < 18; i++) {
         const heart = document.createElement('div');
         heart.className = 'floating-heart';
         heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -320,7 +323,7 @@
       }
     }
 
-    // Standard confetti blast
+    // Standard Confetti
     function triggerConfetti() {
       safeConfetti({
         particleCount: 80,
@@ -328,111 +331,95 @@
         origin: { y: 0.6 },
         colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
       });
-
       setTimeout(() => {
-        safeConfetti({
-          particleCount: 50,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: ['#fb7185', '#f472b6', '#a855f7']
-        });
-        safeConfetti({
-          particleCount: 50,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: ['#fb7185', '#f472b6', '#a855f7']
-        });
-      }, 250);
+        safeConfetti({ particleCount: 45, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#fb7185', '#f472b6', '#a855f7'] });
+        safeConfetti({ particleCount: 45, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#fb7185', '#f472b6', '#a855f7'] });
+      }, 200);
     }
 
-    // Emoji confetti blast (safe fallback if shapeFromText is unavailable)
-    function triggerEmojiConfetti() {
-      if (typeof confetti === 'function' && typeof confetti.shapeFromText === 'function') {
-        try {
-          const letterEmojis = ['🫶', '💖', '💘', '🎀', '✨'];
-          safeConfetti({
-            particleCount: 40,
-            spread: 90,
-            origin: { y: 0.5 },
-            shapes: letterEmojis.map(emoji => confetti.shapeFromText({ text: emoji, scalar: 2 })),
-            scalar: 2
-          });
-        } catch (err) {
-          console.warn('Emoji shapes unsupported, using standard colors:', err);
-        }
-      }
-
-      safeConfetti({
-        particleCount: 60,
-        spread: 80,
-        origin: { y: 0.5 },
-        colors: ['#f43f5e', '#ec4899', '#f472b6', '#ffd1dc']
-      });
-    }
-
-    // UI & Audio References
+    // DOM Elements
+    const enterBtn = document.getElementById('enterSiteBtn');
+    const overlay = document.getElementById('entryOverlay');
     const bgSongPhotos = document.getElementById('audio-photos');
     const bgSongLetter = document.getElementById('audio-letter');
+    const confettiBtn = document.getElementById('confettiBtn');
+    const letterBtn = document.getElementById('letterSurpriseBtn');
+    const letterCard = document.getElementById('letterSurpriseCard');
+    const letterIcon = document.getElementById('letterGiftIcon');
+    const letterPrompt = document.getElementById('letterGiftPrompt');
     const surpriseBtn = document.getElementById('surpriseBtn');
     const surpriseCard = document.getElementById('surpriseCard');
     const giftIcon = document.getElementById('giftIcon');
     const giftPrompt = document.getElementById('giftPrompt');
     const voiceNote = document.getElementById('voiceNote');
-    const letterSurpriseBtn = document.getElementById('letterSurpriseBtn');
-    const letterSurpriseCard = document.getElementById('letterSurpriseCard');
-    const letterGiftIcon = document.getElementById('letterGiftIcon');
-    const letterGiftPrompt = document.getElementById('letterGiftPrompt');
-    const confettiBtn = document.getElementById('confettiBtn');
 
-    // 1. Confetti Header Button
+    // 1. Entrance Tap to Open (Guaranteed to dismiss instantly)
+    if (enterBtn && overlay) {
+      enterBtn.addEventListener('click', () => {
+        // Step 1: Remove overlay immediately
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 500);
+
+        // Step 2: Attempt music playback safely
+        if (bgSongPhotos) {
+          bgSongPhotos.volume = 0.5;
+          bgSongPhotos.play().catch(() => {});
+        }
+
+        // Step 3: Throw confetti
+        triggerConfetti();
+      });
+    }
+
+    // 2. Confetti button
     if (confettiBtn) {
       confettiBtn.addEventListener('click', triggerConfetti);
     }
 
-    // 2. Love Letter Surprise Button
-    let isLetterRevealed = false;
-    if (letterSurpriseBtn) {
-      letterSurpriseBtn.addEventListener('click', () => {
-        triggerEmojiConfetti();
-        if (!isLetterRevealed && letterSurpriseCard) {
-          letterSurpriseCard.classList.remove('hidden');
-          if (letterGiftIcon) letterGiftIcon.textContent = '🫶';
-          if (letterGiftPrompt) letterGiftPrompt.textContent = 'Special Wish for Hastii! 💖';
-          isLetterRevealed = true;
+    // 3. Love letter surprise button
+    let letterOpened = false;
+    if (letterBtn) {
+      letterBtn.addEventListener('click', () => {
+        triggerConfetti();
+        if (!letterOpened && letterCard) {
+          letterCard.classList.remove('hidden');
+          if (letterIcon) letterIcon.textContent = '🫶';
+          if (letterPrompt) letterPrompt.textContent = 'Special Wish for Hastii! 💖';
+          letterOpened = true;
         }
       });
     }
 
-    // 3. Bottom Surprise Gift & Voice Note
-    let isRevealed = false;
+    // 4. Bottom Surprise gift & Voice note
+    let giftOpened = false;
     if (surpriseBtn) {
       surpriseBtn.addEventListener('click', () => {
         if (bgSongPhotos) bgSongPhotos.volume = 0.15;
         if (bgSongLetter) bgSongLetter.volume = 0.15;
 
         if (voiceNote) {
-          try {
-            voiceNote.play().catch(e => console.warn('Voice note playback was blocked:', e));
-            voiceNote.onended = () => {
-              if (bgSongPhotos) bgSongPhotos.volume = 0.5;
-              if (bgSongLetter) bgSongLetter.volume = 0.5;
-            };
-          } catch (e) {
-            console.warn('Voice error:', e);
-          }
+          voiceNote.play().catch(() => {});
+          voiceNote.onended = () => {
+            if (bgSongPhotos) bgSongPhotos.volume = 0.5;
+            if (bgSongLetter) bgSongLetter.volume = 0.5;
+          };
         }
 
         triggerConfetti();
 
-        if (!isRevealed && surpriseCard) {
+        if (!giftOpened && surpriseCard) {
           surpriseCard.classList.remove('hidden');
           if (giftIcon) giftIcon.textContent = '💖';
           if (giftPrompt) giftPrompt.textContent = 'Opened with Love!';
-          isRevealed = true;
+          giftOpened = true;
         }
       });
     }
 
-    // Initialize fl
+    // Start hearts animation
+    window.addEventListener('load', createFloatingHearts);
+  </script>
+</body>
+</html>
