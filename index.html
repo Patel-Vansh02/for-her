@@ -300,132 +300,182 @@
     </footer>
   </main>
 
-  <script>
-    function createFloatingHearts() {
-      const container = document.getElementById('heart-container');
-      const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
-      const count = 18;
-
-      for (let i = 0; i < count; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        heart.style.left = `${Math.random() * 100}vw`;
-        heart.style.fontSize = `${Math.random() * 16 + 18}px`;
-        heart.style.animationDuration = `${Math.random() * 6 + 6}s`;
-        heart.style.animationDelay = `${Math.random() * 5}s`;
-        container.appendChild(heart);
+  
+      <script>
+  // Safe helper for confetti
+  function safeConfetti(options) {
+    if (typeof confetti === 'function') {
+      try {
+        confetti(options);
+      } catch (e) {
+        console.warn('Confetti error:', e);
       }
     }
+  }
 
-    function triggerConfetti() {
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
-        });
+  // Floating hearts generator
+  function createFloatingHearts() {
+    const container = document.getElementById('heart-container');
+    if (!container) return;
+    const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
+    const count = 18;
 
-        setTimeout(() => {
-          confetti({
-            particleCount: 50,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#fb7185', '#f472b6', '#a855f7']
-          });
-          confetti({
-            particleCount: 50,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#fb7185', '#f472b6', '#a855f7']
-          });
-        }, 250);
-      }
+    for (let i = 0; i < count; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.fontSize = `${Math.random() * 16 + 18}px`;
+      heart.style.animationDuration = `${Math.random() * 6 + 6}s`;
+      heart.style.animationDelay = `${Math.random() * 5}s`;
+      container.appendChild(heart);
     }
+  }
 
-    function triggerEmojiConfetti() {
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 70,
+  // Standard confetti blast
+  function triggerConfetti() {
+    safeConfetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#f43f5e', '#ec4899', '#f472b6', '#fb7185', '#ffd1dc']
+    });
+
+    setTimeout(() => {
+      safeConfetti({
+        particleCount: 50,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: ['#fb7185', '#f472b6', '#a855f7']
+      });
+      safeConfetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: ['#fb7185', '#f472b6', '#a855f7']
+      });
+    }, 250);
+  }
+
+  // Emoji confetti blast (safe against shapeFromText support)
+  function triggerEmojiConfetti() {
+    if (typeof confetti === 'function' && typeof confetti.shapeFromText === 'function') {
+      try {
+        const letterEmojis = ['🫶', '💖', '💘', '🎀', '✨'];
+        safeConfetti({
+          particleCount: 40,
           spread: 90,
           origin: { y: 0.5 },
-          colors: ['#f43f5e', '#ec4899', '#f472b6', '#ffd1dc', '#f9a8d4']
+          shapes: letterEmojis.map(emoji => confetti.shapeFromText({ text: emoji, scalar: 2 })),
+          scalar: 2
         });
+      } catch (err) {
+        console.warn('Emoji shapes unsupported, falling back to standard confetti', err);
       }
     }
+    
+    // Always fire pretty colored confetti as a reliable fallback
+    safeConfetti({
+      particleCount: 60,
+      spread: 80,
+      origin: { y: 0.5 },
+      colors: ['#f43f5e', '#ec4899', '#f472b6', '#ffd1dc']
+    });
+  }
 
-    const enterBtn = document.getElementById('enterSiteBtn');
-    const overlay = document.getElementById('entryOverlay');
-    const surpriseBtn = document.getElementById('surpriseBtn');
-    const surpriseCard = document.getElementById('surpriseCard');
-    const giftIcon = document.getElementById('giftIcon');
-    const giftPrompt = document.getElementById('giftPrompt');
-    const voiceNote = document.getElementById('voiceNote');
-    const voiceNoteStatus = document.getElementById('voiceNoteStatus');
+  // UI Elements
+  const enterBtn = document.getElementById('enterSiteBtn');
+  const overlay = document.getElementById('entryOverlay');
+  const bgSong = document.getElementById('bgSong');
+  const surpriseBtn = document.getElementById('surpriseBtn');
+  const surpriseCard = document.getElementById('surpriseCard');
+  const giftIcon = document.getElementById('giftIcon');
+  const giftPrompt = document.getElementById('giftPrompt');
+  const voiceNote = document.getElementById('voiceNote');
+  const letterSurpriseBtn = document.getElementById('letterSurpriseBtn');
+  const letterSurpriseCard = document.getElementById('letterSurpriseCard');
+  const letterGiftIcon = document.getElementById('letterGiftIcon');
+  const letterGiftPrompt = document.getElementById('letterGiftPrompt');
+  const confettiBtn = document.getElementById('confettiBtn');
 
-    const letterSurpriseBtn = document.getElementById('letterSurpriseBtn');
-    const letterSurpriseCard = document.getElementById('letterSurpriseCard');
-    const letterGiftIcon = document.getElementById('letterGiftIcon');
-    const letterGiftPrompt = document.getElementById('letterGiftPrompt');
+  // 1. Bulletproof entrance button handler
+  if (enterBtn && overlay) {
+    enterBtn.addEventListener('click', () => {
+      // Hide the overlay immediately so it CANNOT freeze
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 700);
 
-    let currentAudio = null;
-    let siteStarted = false;
-
-    function playAudioForSection(audioId) {
-      if (!siteStarted) return;
-
-      const newAudio = document.getElementById(audioId);
-      if (!newAudio || currentAudio === newAudio) return;
-
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-      }
-
-      currentAudio = newAudio;
-      currentAudio.volume = 0.5;
-      currentAudio.play().catch(err => console.log("Audio autoplay prevented:", err));
-    }
-
-    const sectionAudioMap = {
-      'sec-intro': 'audio-photos',
-      'sec-photos': 'audio-photos',
-      'sec-letter': 'audio-letter'
-    };
-
-    const observerOptions = { root: null, threshold: 0.4 };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const audioId = sectionAudioMap[entry.target.id];
-          if (audioId) playAudioForSection(audioId);
-        }
-      });
-    }, observerOptions);
-
-    function checkVoiceNoteAvailability() {
-      if (!voiceNote) return;
-
-      const source = voiceNote.querySelector('source');
-      if (!source) return;
-
-      const url = source.getAttribute('src');
-      if (!url) return;
-
-      fetch(url, { method: 'HEAD' })
-        .then(response => {
-          if (!response.ok) {
-            voiceNote.setAttribute('hidden', 'hidden');
-            if (voiceNoteStatus) {
-              voiceNoteStatus.textContent = 'Voice note is coming soon — a little surprise is on the way 💌';
-              voiceNoteStatus.classList.remove('hidden');
-            }
+      // Attempt to play music without halting execution
+      if (bgSong) {
+        try {
+          bgSong.volume = 0.5;
+          const playPromise = bgSong.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(err => {
+              console.warn('Audio play was blocked or file missing:', err);
+            });
           }
-        })
-        .catch(() => {
-          voiceNote.setAttribute('hidden', 'hidden');
-          
+        } catch (err) {
+          console.warn('Audio error:', err);
+        }
+      }
+
+      // Trigger confetti
+      triggerConfetti();
+    });
+  }
+
+  // 2. Love Letter surprise button
+  let isLetterRevealed = false;
+  if (letterSurpriseBtn) {
+    letterSurpriseBtn.addEventListener('click', () => {
+      triggerEmojiConfetti();
+      if (!isLetterRevealed && letterSurpriseCard) {
+        letterSurpriseCard.classList.remove('hidden');
+        if (letterGiftIcon) letterGiftIcon.textContent = '🫶';
+        if (letterGiftPrompt) letterGiftPrompt.textContent = 'Special Wish for Hastii! 💖';
+        isLetterRevealed = true;
+      }
+    });
+  }
+
+  // 3. Bottom surprise gift & voice note reveal
+  let isRevealed = false;
+  if (surpriseBtn) {
+    surpriseBtn.addEventListener('click', () => {
+      if (bgSong) bgSong.volume = 0.15;
+
+      if (voiceNote) {
+        try {
+          voiceNote.play().catch(e => console.warn('Voice playback error:', e));
+          voiceNote.onended = () => {
+            if (bgSong) bgSong.volume = 0.5;
+          };
+        } catch (e) {
+          console.warn('Voice error:', e);
+        }
+      }
+
+      triggerConfetti();
+
+      if (!isRevealed && surpriseCard) {
+        surpriseCard.classList.remove('hidden');
+        if (giftIcon) giftIcon.textContent = '💖';
+        if (giftPrompt) giftPrompt.textContent = 'Opened with Love!';
+        isRevealed = true;
+      }
+    });
+  }
+
+  // Extra Confetti button
+  if (confettiBtn) {
+    confettiBtn.addEventListener('click', triggerConfetti);
+  }
+
+  // Initialize floating hearts
+  window.addEventListener('load', createFloatingHearts);
+</script>
