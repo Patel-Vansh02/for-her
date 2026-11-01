@@ -254,7 +254,9 @@
       <div class="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-rose-100 shadow-md">
         <div class="flex flex-col sm:flex-row items-center gap-6">
           <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-4 border-rose-200 flex items-center justify-center shadow-lg group">
-            <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white text-xs font-bold">❤️</div>
+            <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white text-xs font-bold">
+              ❤️
+            </div>
             <div class="absolute inset-0 rounded-full border border-white/20 animate-spin" style="animation-duration: 10s;"></div>
           </div>
 
@@ -339,6 +341,11 @@
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
 
+    function setScrollLock(isLocked) {
+      document.body.style.overflow = isLocked ? "hidden" : "auto";
+      document.documentElement.style.overflow = isLocked ? "hidden" : "auto";
+    }
+
     unlockDateText.textContent = unlockAt.toLocaleString([], {
       dateStyle: "full",
       timeStyle: "short"
@@ -350,9 +357,12 @@
 
       if (diff <= 0) {
         lockOverlay.style.display = "none";
+        setScrollLock(false);
         document.getElementById("entryOverlay").classList.remove("hidden");
         return;
       }
+
+      setScrollLock(true);
 
       const totalSeconds = Math.floor(diff / 1000);
       const days = Math.floor(totalSeconds / 86400);
@@ -366,6 +376,7 @@
       secondsEl.textContent = String(seconds).padStart(2, "0");
     }
 
+    setScrollLock(true);
     updateLockScreen();
     setInterval(updateLockScreen, 1000);
 
@@ -414,23 +425,98 @@
       }
     }
 
-    // Audio elements & UI references
+    function triggerEmojiConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 70,
+          spread: 90,
+          origin: { y: 0.5 },
+          colors: ['#f43f5e', '#ec4899', '#f472b6', '#ffd1dc', '#f9a8d4']
+        });
+      }
+    }
+
     const enterBtn = document.getElementById('enterSiteBtn');
     const overlay = document.getElementById('entryOverlay');
-    const bgSong = document.getElementById('bgSong');
     const surpriseBtn = document.getElementById('surpriseBtn');
     const surpriseCard = document.getElementById('surpriseCard');
     const giftIcon = document.getElementById('giftIcon');
     const giftPrompt = document.getElementById('giftPrompt');
     const voiceNote = document.getElementById('voiceNote');
+    const voiceNoteStatus = document.getElementById('voiceNoteStatus');
 
-    // 1. Entrance tap to start music
-    enterBtn.addEventListener('click', () => {
-      if (bgSong) {
-        bgSong.volume = 0.5;
-        bgSong.play().catch(err => console.log('Audio autoplay blocked:', err));
+    const letterSurpriseBtn = document.getElementById('letterSurpriseBtn');
+    const letterSurpriseCard = document.getElementById('letterSurpriseCard');
+    const letterGiftIcon = document.getElementById('letterGiftIcon');
+    const letterGiftPrompt = document.getElementById('letterGiftPrompt');
+
+    let currentAudio = null;
+    let siteStarted = false;
+
+    function playAudioForSection(audioId) {
+      if (!siteStarted) return;
+
+      const newAudio = document.getElementById(audioId);
+      if (!newAudio || currentAudio === newAudio) return;
+
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
       }
 
+      currentAudio = newAudio;
+      currentAudio.volume = 0.5;
+      currentAudio.play().catch(err => console.log("Audio autoplay prevented:", err));
+    }
+
+    const sectionAudioMap = {
+      'sec-intro': 'audio-photos',
+      'sec-photos': 'audio-photos',
+      'sec-letter': 'audio-letter'
+    };
+
+    const observerOptions = { root: null, threshold: 0.4 };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const audioId = sectionAudioMap[entry.target.id];
+          if (audioId) playAudioForSection(audioId);
+        }
+      });
+    }, observerOptions);
+
+    function checkVoiceNoteAvailability() {
+      if (!voiceNote) return;
+
+      const source = voiceNote.querySelector('source');
+      if (!source) return;
+
+      const url = source.getAttribute('src');
+      if (!url) return;
+
+      fetch(url, { method: 'HEAD' })
+        .then(response => {
+          if (!response.ok) {
+            voiceNote.setAttribute('hidden', 'hidden');
+            if (voiceNoteStatus) {
+              voiceNoteStatus.textContent = 'Voice note is coming soon — a little surprise is on the way 💌';
+              voiceNoteStatus.classList.remove('hidden');
+            }
+          }
+        })
+        .catch(() => {
+          voiceNote.setAttribute('hidden', 'hidden');
+          if (voiceNoteStatus) {
+            voiceNoteStatus.textContent = 'Voice note is coming soon — a little surprise is on the way 💌';
+            voiceNoteStatus.classList.remove('hidden');
+          }
+        });
+    }
+
+    enterBtn.addEventListener('click', () => {
+      siteStarted = true;
+      playAudioForSection('audio-photos');
       triggerConfetti();
 
       overlay.classList.add('opacity-0', 'pointer-events-none');
@@ -439,18 +525,18 @@
       }, 700);
     });
 
-    // 2. Surprise gift & voice note reveal
     let isRevealed = false;
-    surpriseBtn.addEventListener('click', () => {
-      if (bgSong) {
-        bgSong.volume = 0.15;
-      }
 
-      if (voiceNote) {
-        voiceNote.play().catch(e => console.log('Playback error:', e));
+    surpriseBtn.addEventListener('click', () => {
+      if (currentAudio) currentAudio.volume = 0.15;
+
+      if (voiceNote && !voiceNote.hasAttribute('hidden')) {
+        voiceNote.play().catch(() => {
+          console.log('Voice note playback unavailable yet.');
+        });
 
         voiceNote.onended = () => {
-          if (bgSong) bgSong.volume = 0.5;
+          if (currentAudio) currentAudio.volume = 0.5;
         };
       }
 
@@ -464,57 +550,31 @@
       }
     });
 
-    // 3. Secret Paragraph Toggle in the Love Letter
-    const toggleSecretBtn = document.getElementById('toggleSecretBtn');
-    const secretParagraph = document.getElementById('secretParagraph');
-    const secretBtnText = document.getElementById('secretBtnText');
-    const secretBtnIcon = document.getElementById('secretBtnIcon');
-
-    toggleSecretBtn.addEventListener('click', () => {
-      const isHidden = secretParagraph.classList.contains('hidden');
-      if (isHidden) {
-        secretParagraph.classList.remove('hidden');
-        secretBtnText.textContent = 'Hide this little secret';
-        secretBtnIcon.textContent = '💌';
-        triggerConfetti();
-      } else {
-        secretParagraph.classList.add('hidden');
-        secretBtnText.textContent = 'Tap to read a secret thought...';
-        secretBtnIcon.textContent = '🤫';
-      }
-    });
-
-    // 4. Polaroid Tap to Straighten and Enlarge
-    const polaroids = document.querySelectorAll('.polaroid');
-    polaroids.forEach((polaroid) => {
-      polaroid.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isAlreadyExpanded = polaroid.classList.contains('is-expanded');
-
-        // Collapse all others
-        polaroids.forEach(p => p.classList.remove('is-expanded'));
-
-        // Toggle state
-        if (!isAlreadyExpanded) {
-          polaroid.classList.add('is-expanded');
-        }
-      });
-    });
-
-    // Tap outside to reset polaroids
-    document.addEventListener('click', () => {
-      polaroids.forEach(p => p.classList.remove('is-expanded'));
-    });
-
-    // Extra confetti button
     const confettiBtn = document.getElementById('confettiBtn');
     confettiBtn.addEventListener('click', () => {
       triggerConfetti();
     });
 
-    // Load initialization
+    let isLetterRevealed = false;
+    letterSurpriseBtn.addEventListener('click', () => {
+      triggerEmojiConfetti();
+
+      if (!isLetterRevealed) {
+        letterSurpriseCard.classList.remove('hidden');
+        letterGiftIcon.textContent = '🫶';
+        letterGiftPrompt.textContent = 'Special Wish for Hastii! 💖';
+        isLetterRevealed = true;
+      }
+    });
+
     window.addEventListener('load', () => {
       createFloatingHearts();
+      Object.keys(sectionAudioMap).forEach(secId => {
+        const el = document.getElementById(secId);
+        if (el) observer.observe(el);
+      });
+
+      checkVoiceNoteAvailability();
     });
   </script>
 </body>
