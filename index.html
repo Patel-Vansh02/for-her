@@ -1,14 +1,15 @@
-<!This should work>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Happy Birthday My Betuu! 💖✨
-<meta property="og:title" content="A Surprise For You 🤍">
-<meta property="og:description" content="Tap to open your special link.">
-<meta property="og:image" content="">
-</title>
+
+  <title>Happy Birthday My Betuu! 💖✨</title>
+
+  <meta property="og:title" content="A Surprise For You 🤍">
+  <meta property="og:description" content="Tap to open your special link.">
+  <meta property="og:image" content="">
 
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -43,12 +44,8 @@
         transform: translateY(110vh) scale(0.6) rotate(0deg);
         opacity: 0;
       }
-      20% {
-        opacity: 0.7;
-      }
-      80% {
-        opacity: 0.7;
-      }
+      20% { opacity: 0.7; }
+      80% { opacity: 0.7; }
       100% {
         transform: translateY(-10vh) scale(1.1) rotate(360deg);
         opacity: 0;
@@ -66,8 +63,14 @@
     }
 
     @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.4)); }
-      50% { transform: scale(1.05); filter: drop-shadow(0 0 22px rgba(244, 114, 182, 0.7)); }
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.4));
+      }
+      50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 22px rgba(244, 114, 182, 0.7));
+      }
     }
 
     .pulse-glow {
@@ -84,36 +87,6 @@
 
 <body class="text-rose-950 relative selection:bg-rose-200 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] px-3 sm:px-0">
 
-  <div id="lockOverlay" class="fixed inset-0 z-[60] flex items-center justify-center bg-rose-50/95 backdrop-blur-md">
-    <div class="text-center px-6 max-w-md">
-      <div class="text-6xl animate-bounce">🔒</div>
-      <h2 class="mt-4 text-3xl font-extrabold text-rose-800">This surprise is locked</h2>
-      <p class="mt-2 text-rose-500 font-medium text-sm">
-        It will open on
-        <span id="unlockDateText" class="font-bold text-rose-700"></span>
-      </p>
-
-      <div id="countdown" class="mt-6 flex justify-center gap-3 text-center text-rose-800">
-        <div class="bg-white/80 rounded-2xl px-3 py-2 shadow-sm">
-          <div id="days" class="text-2xl font-bold">0</div>
-          <div class="text-[10px] uppercase tracking-wider">Days</div>
-        </div>
-        <div class="bg-white/80 rounded-2xl px-3 py-2 shadow-sm">
-          <div id="hours" class="text-2xl font-bold">0</div>
-          <div class="text-[10px] uppercase tracking-wider">Hours</div>
-        </div>
-        <div class="bg-white/80 rounded-2xl px-3 py-2 shadow-sm">
-          <div id="minutes" class="text-2xl font-bold">0</div>
-          <div class="text-[10px] uppercase tracking-wider">Mins</div>
-        </div>
-        <div class="bg-white/80 rounded-2xl px-3 py-2 shadow-sm">
-          <div id="seconds" class="text-2xl font-bold">0</div>
-          <div class="text-[10px] uppercase tracking-wider">Secs</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <audio id="audio-photos" preload="metadata" loop>
     <source src="Dhun Laagi AETrim1792581107931.mp3" type="audio/mpeg">
   </audio>
@@ -122,7 +95,7 @@
     <source src="Jigardan_Gadhavi_Kavya_Limaye_-_RAMO_RE_-_Navratri_2025_(mp3.pm) AETrim1792581502781.mp3" type="audio/mpeg">
   </audio>
 
-  <div id="entryOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-rose-50/95 backdrop-blur-md transition-opacity duration-700 hidden">
+  <div id="entryOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-rose-50/95 backdrop-blur-md transition-opacity duration-700">
     <div class="text-center space-y-4 px-6 max-w-sm">
       <div class="text-6xl animate-bounce">💌</div>
       <h2 class="text-3xl font-extrabold text-rose-800">A Surprise For My Betuu</h2>
@@ -136,7 +109,9 @@
   <div id="heart-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
   <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 flex flex-col gap-16">
+
     <section id="sec-intro" class="text-center space-y-4 min-h-[85vh] flex flex-col justify-center items-center">
+
       <div class="inline-flex items-center gap-2 bg-rose-100/80 border border-rose-200/60 px-4 py-1.5 rounded-full text-rose-600 text-sm font-semibold tracking-wide shadow-sm animate-bounce">
         <span>✨ IT'S YOUR SPECIAL DAY! ✨</span>
       </div>
@@ -158,12 +133,14 @@
     </section>
 
     <section id="sec-photos" class="space-y-6 pt-10">
+
       <div class="text-center">
         <span class="text-rose-400 font-bold uppercase tracking-wider text-xs">Our Little Moments</span>
         <h2 class="text-2xl sm:text-3xl font-bold text-rose-900">Captured in My Heart 📸🧸</h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-4">
+
         <div class="polaroid bg-white p-4 rounded-2xl relative rotate-0 sm:rotate-[-2deg]">
           <div class="tape w-24 h-6 absolute -top-3 left-1/2 -translate-x-1/2 rotate-1"></div>
           <div class="aspect-square w-full overflow-hidden rounded-xl bg-rose-50">
@@ -196,6 +173,7 @@
             <p class="text-xs text-rose-400 mt-0.5">Best adventures</p>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -211,7 +189,9 @@
     </section>
 
     <section id="sec-letter" class="space-y-8 pt-10">
+
       <div class="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 space-y-6">
+
         <div class="flex items-center gap-3 border-b border-rose-100 pb-4">
           <div class="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-xl">💌</div>
           <div>
@@ -221,6 +201,7 @@
         </div>
 
         <div class="space-y-4 text-rose-800 leading-relaxed text-base sm:text-lg">
+
           <p>
             <span class="font-handwriting text-3xl text-rose-500 font-bold block mb-1">Dearest Hastii,</span>
             The first time I looked into your eyes after realizing I had a crush on you was pure nervousness, but also the sweetest, most wholesome moment. I felt like if I hugged you, I'd never want to let you go. I tried to talk to you in school so many times, but something always held me back from confessing. Even now that we're together, I still have that same crush on you, and I still fall for you all over again. 💕
@@ -229,9 +210,10 @@
           <p>
             I never imagined how far we would come in this relationship. We started as complete strangers, turned into best friends having random chats, and became everything to each other. I bet you didn't know that I used to note down every single detail you ever told me about yourself. I acted completely normal back then to hide my feelings, but that one confession changed my entire life. Thank you for choosing me, jaanu. 💞
           </p>
-<p>
-To the one who holds my entire heart, loving you is the easiest, sweetest thing I have ever known, and every single day feels like a quiet blessing simply because you exist in my world. You are my favorite thought when I wake up, my calmest peace at the end of a long day, and the reason my heart feels so full without even trying. Today, I just want you to feel how deeply, endlessly, and unconditionally you are adored—not just for the light you bring into my life, but for the rare, irreplaceable soul you are. May this new chapter wrap you in every ounce of warmth, tenderness, and magic your heart could ever wish for, and may I always be right beside you to hold your hand through all of it, jaanu. 💞
-</p>
+
+          <p>
+            To the one who holds my entire heart, loving you is the easiest, sweetest thing I have ever known, and every single day feels like a quiet blessing simply because you exist in my world. You are my favorite thought when I wake up, my calmest peace at the end of a long day, and the reason my heart feels so full without even trying. Today, I just want you to feel how deeply, endlessly, and unconditionally you are adored—not just for the light you bring into my life, but for the rare, irreplaceable soul you are. May this new chapter wrap you in every ounce of warmth, tenderness, and magic your heart could ever wish for, and may I always be right beside you to hold your hand through all of it, jaanu. 💞
+          </p>
 
           <div class="pt-3 pb-2 text-center">
             <button id="letterSurpriseBtn" class="pulse-glow inline-flex items-center gap-2 bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer">
@@ -249,6 +231,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
           <p>
             My biggest dream is for us to keep growing like this and spend the rest of our lives together. I love you so much, more than words could ever describe. I hope this birthday is extra special and brings you endless happiness. HAPPY BIRTHDAY! 🫶🧿
           </p>
+
         </div>
 
         <div class="pt-4 flex justify-end">
@@ -257,10 +240,12 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
             <p class="text-sm font-semibold text-rose-400 mt-1">Vanshuu❤️</p>
           </div>
         </div>
+
       </div>
 
       <div class="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-rose-100 shadow-md">
         <div class="flex flex-col sm:flex-row items-center gap-6">
+
           <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-4 border-rose-200 flex items-center justify-center shadow-lg group">
             <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white text-xs font-bold">
               ❤️
@@ -273,6 +258,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
               <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-pink-100 text-pink-600">Now Playing</span>
               <span class="text-xs text-rose-400">Track of our story</span>
             </div>
+
             <h3 class="text-lg font-bold text-rose-900">Ramo Re 🎶</h3>
 
             <p class="font-handwriting text-xl text-rose-600">
@@ -282,15 +268,18 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
             <div class="w-full bg-rose-100 h-2 rounded-full overflow-hidden mt-3">
               <div class="bg-gradient-to-r from-rose-400 to-pink-500 h-full w-2/3 rounded-full"></div>
             </div>
+
             <div class="flex justify-between text-[11px] text-rose-400 pt-1 font-medium">
               <span>2:14</span>
               <span>Forever & Always ♾️</span>
             </div>
           </div>
+
         </div>
       </div>
 
       <div class="bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-200 rounded-3xl p-6 sm:p-8 text-center space-y-6 shadow-sm">
+
         <div>
           <h3 class="text-2xl font-bold text-rose-900">A Surprise Birthday Wish 🎁</h3>
           <p class="text-sm text-rose-400 mt-1">Tap the present to open your surprise message!</p>
@@ -306,6 +295,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
         <div id="surpriseCard" class="hidden bg-white p-6 rounded-2xl border border-pink-200 shadow-md max-w-lg mx-auto text-rose-800 space-y-4 transition-all duration-500">
           <div class="text-3xl">🎂🎈🥳</div>
           <h4 class="font-bold text-lg text-rose-900">A Message From My Heart 🎙️❤️</h4>
+
           <p class="text-sm leading-relaxed text-rose-700">
             May your year be filled with sweet adventures, cozy dates, endless laughter, and all your biggest dreams coming true! I promise to always be right by your side cheering for you. 💕✨
           </p>
@@ -319,6 +309,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
             </audio>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -330,64 +321,19 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
         <span>💐</span>
         <span>🧸</span>
       </div>
+
       <p class="text-rose-500 font-semibold text-sm">
         Happy Birthday, Jaanuu! Love you to the moon and back 🌙✨
       </p>
+
       <p class="text-xs text-rose-300">
         Made with ❤️ specially for you
       </p>
     </footer>
+
   </main>
 
   <script>
-    const unlockAt = new Date("2026-11-27T00:00:00+05:30");
-
-    const lockOverlay = document.getElementById("lockOverlay");
-    const unlockDateText = document.getElementById("unlockDateText");
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    function setScrollLock(isLocked) {
-      document.body.style.overflow = isLocked ? "hidden" : "auto";
-      document.documentElement.style.overflow = isLocked ? "hidden" : "auto";
-    }
-
-    unlockDateText.textContent = unlockAt.toLocaleString([], {
-      dateStyle: "full",
-      timeStyle: "short"
-    });
-
-    function updateLockScreen() {
-      const now = new Date();
-      const diff = unlockAt.getTime() - now.getTime();
-
-      if (diff <= 0) {
-        lockOverlay.style.display = "none";
-        setScrollLock(false);
-        document.getElementById("entryOverlay").classList.remove("hidden");
-        return;
-      }
-
-      setScrollLock(true);
-
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / 86400);
-      const hours = Math.floor((totalSeconds % 86400) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      daysEl.textContent = String(days).padStart(2, "0");
-      hoursEl.textContent = String(hours).padStart(2, "0");
-      minutesEl.textContent = String(minutes).padStart(2, "0");
-      secondsEl.textContent = String(seconds).padStart(2, "0");
-    }
-
-    setScrollLock(true);
-    updateLockScreen();
-    setInterval(updateLockScreen, 1000);
-
     function createFloatingHearts() {
       const container = document.getElementById('heart-container');
       const emojis = ['💖', '💕', '🌸', '✨', '🍓', '🎀', '😘', '🤍'];
@@ -422,6 +368,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
             origin: { x: 0 },
             colors: ['#fb7185', '#f472b6', '#a855f7']
           });
+
           confetti({
             particleCount: 50,
             angle: 120,
@@ -507,6 +454,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
         .then(response => {
           if (!response.ok) {
             voiceNote.setAttribute('hidden', 'hidden');
+
             if (voiceNoteStatus) {
               voiceNoteStatus.textContent = 'Voice note is coming soon — a little surprise is on the way 💌';
               voiceNoteStatus.classList.remove('hidden');
@@ -515,6 +463,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
         })
         .catch(() => {
           voiceNote.setAttribute('hidden', 'hidden');
+
           if (voiceNoteStatus) {
             voiceNoteStatus.textContent = 'Voice note is coming soon — a little surprise is on the way 💌';
             voiceNoteStatus.classList.remove('hidden');
@@ -528,6 +477,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
       triggerConfetti();
 
       overlay.classList.add('opacity-0', 'pointer-events-none');
+
       setTimeout(() => {
         overlay.style.display = 'none';
       }, 700);
@@ -559,11 +509,13 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
     });
 
     const confettiBtn = document.getElementById('confettiBtn');
+
     confettiBtn.addEventListener('click', () => {
       triggerConfetti();
     });
 
     let isLetterRevealed = false;
+
     letterSurpriseBtn.addEventListener('click', () => {
       triggerEmojiConfetti();
 
@@ -577,6 +529,7 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
 
     window.addEventListener('load', () => {
       createFloatingHearts();
+
       Object.keys(sectionAudioMap).forEach(secId => {
         const el = document.getElementById(secId);
         if (el) observer.observe(el);
@@ -585,5 +538,6 @@ To the one who holds my entire heart, loving you is the easiest, sweetest thing 
       checkVoiceNoteAvailability();
     });
   </script>
+
 </body>
 </html>
